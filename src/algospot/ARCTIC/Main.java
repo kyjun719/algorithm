@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 10.18
  */
 public class Main {
+	//기지들 점을 나타내는 클래스
 	static class Point {
 		double x;
 		double y;
@@ -63,14 +64,16 @@ public class Main {
 			
 			for(int tc = 0; tc < c; tc++) {
 				int m = Integer.parseInt(bf.readLine());
+				//distArr[i][j] : i번째 점과 j번째 점 사이의 거리
 				double[][] distArr = new double[m][m];
+				//점들 리스트
 				List<Point> pointList = new ArrayList<>();
 
 				for(int i = 0; i < m; i++) {
 					Point tmpPoint = new Point(Arrays.stream(bf.readLine().split(" "))
 							.mapToDouble(Double::parseDouble)
 							.toArray());
-					
+					//이전 점들과의 거리 계산
 					for(int j = 0; j < i; j++) {
 						double dist = getDistance(pointList.get(j), tmpPoint);
 						distArr[j][i] = dist;
@@ -79,7 +82,7 @@ public class Main {
 					
 					pointList.add(tmpPoint);
 				}
-				
+
 				System.out.println(String.format("%.2f", getMinPower(distArr)));
 			}
 		} catch (Exception e) {
@@ -94,6 +97,7 @@ public class Main {
 		//Math.sqrt(1000*1000+1000*1000)/(2^25) < 0.001
 		for(int i = 0; i < 25; i++) {
 			double mid = (low + high) / 2;
+			//다 연결가능하면 거리를 줄이고, 아니면 거리를 늘림
 			if(enableCall(distArr, mid)) {
 				high = mid;
 			} else {
@@ -103,9 +107,10 @@ public class Main {
 		
 		return low;
 	}
-	
+	//전부 연결 가능한지 여부 반환 
 	static boolean enableCall(double[][] distArr, double range) {
 		boolean[] connected = new boolean[distArr.length];
+		//다음 연결될 점의 인덱스 큐
 		Queue<Integer> queue = new LinkedList<>();
 		queue.add(0);
 		connected[0] = true;
@@ -116,6 +121,7 @@ public class Main {
 				if(i == idx) {
 					continue;
 				}
+				//기지간의 거리가 해당 거리보다 짧으면 다음 연결 확인 목록에 추가
 				if(connected[i] == false && distArr[idx][i] <= range) {
 					queue.add(i);
 					connected[i] = true;
@@ -124,6 +130,7 @@ public class Main {
 			}
 		}
 		
+		//다 연결되었는지 반환
 		return cnt == distArr.length;
 	}
 	

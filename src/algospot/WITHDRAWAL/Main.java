@@ -56,6 +56,7 @@ public class Main {
 		double min = 0;
 		double max = 1;
 		
+		//이분검색으로 등수 검색
 		for(int i = 0; i <100; i++) {
 			double avg = (min + max) / 2;
 			if(isDrawable(avg)) {
@@ -72,13 +73,16 @@ public class Main {
 	private static boolean isDrawable(double avg) {
 		double[] cal = new double[n];
 		
+		//각 수업에 대한 평균 기준 등수 계산
 		for(int i = 0; i < n; i++) {
 			cal[i] = avg*c[i] - r[i];
 		}
 		
+		//등수가 높은순으로 정렬
 		Arrays.sort(cal);
 		
 		double sum = 0;
+		//철회한 과목을 제외한 평균등수 계산
 		for(int i = n-1; i >= n-k; i--) {
 			sum += cal[i];
 		}

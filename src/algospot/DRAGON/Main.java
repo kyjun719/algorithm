@@ -20,12 +20,12 @@ FX+YF
 FX-YF-FX+YF+FX-YF-FX+YF-FX-YF- 
  */
 public class Main {
-	static int[] dragonLen = new int [501];
+	static int[] dragonLen = new int [51];
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-		
+		//X나 Y를 치환한 후의 길이
 		dragonLen[0] = 1;
-		for(int i = 1; i < 501; i++) {
+		for(int i = 1; i < 51; i++) {
 			dragonLen[i] = Math.min(1000000100, dragonLen[i-1]*2 + 2);
 		}
 		
@@ -48,13 +48,14 @@ public class Main {
 	}
 	
 	static char curve(String seed, int generation, int skip) {
-		//System.out.println(seed + "," + generation + "," + skip);
 		if(generation == 0) {
 			return seed.charAt(skip);
 		}
 		
 		for(char tmp : seed.toCharArray()) {
+			//확장 가능한 문자일 경우
 			if(tmp == 'X' || tmp == 'Y') {
+				//skip수가 커브의 문자수보다 큰경우
 				if(skip >= dragonLen[generation]) {
 					skip -= dragonLen[generation];
 				} else if(tmp == 'X') {
@@ -63,6 +64,7 @@ public class Main {
 					return curve("FX-Y", generation-1, skip);
 				}
 			} else if(skip > 0) {
+				//X와 Y외의 문자인 경우
 				skip--;
 			} else {
 				return tmp;

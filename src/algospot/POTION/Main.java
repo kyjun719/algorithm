@@ -42,21 +42,22 @@ public class Main {
 						.toArray();
 				
 				//get gcd of need
-				int val = need[0];
+				int needGcd = need[0];
 				for(int i = 1; i < n; i++) {
-					val = gcd(val, need[i]);
+					needGcd = gcd(needGcd, need[i]);
 				}
 				
 				//get max(ceil(input[i]/need[i]*gcd))
 				int a = 0;
+				//들어가야될 최대공약수 배수의 최대값 계산
 				for(int i = 0; i < n; i++) {
-					a = Math.max(a, (int) Math.ceil((double)input[i]/(need[i]/val)));
+					a = Math.max(a, (int) Math.ceil((double)input[i]/(need[i]/needGcd)));
 				}
 				
 				//calculate answer
 				int[] answer = new int[n];
 				for(int i = 0; i < n; i++) {
-					answer[i] = a*need[i]/val - input[i];
+					answer[i] = a*need[i]/needGcd - input[i];
 				}
 				
 				System.out.println(Arrays.toString(answer)

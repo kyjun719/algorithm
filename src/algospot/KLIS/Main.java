@@ -30,8 +30,11 @@ import java.util.Map.Entry;
 5 6 7 8
  */
 public class Main {
+	//전체 배열 길이
 	static int n;
+	//최대 증가 부분 수열의 인덱스
 	static long k;
+	//전체 배열
 	static int[] arr;
 	static int[] cacheLen = new int[501];
 	static long[] cacheCnt = new long[501];
@@ -70,6 +73,7 @@ public class Main {
 		}
 	}
 	
+	//start에서 시작하는 배열의 최대길이 반환
 	static int countLen(int start) {
 		if(start != -1 && cacheLen[start] != -1) {
 			return cacheLen[start];
@@ -77,6 +81,7 @@ public class Main {
 		
 		int ret = 1;
 		for(int next = start+1; next < n; next++) {
+			//처음 시작 이거나 다음 배열값이 현재 배열값보다 큰 경우  
 			if(start == -1 || arr[start] < arr[next]) {
 				ret = Math.max(ret, countLen(next) + 1);
 			}
@@ -88,6 +93,7 @@ public class Main {
 		return ret;
 	}
 	
+	//start에서 시작하는 최대 길이의 배열 갯수 반환
 	static long count(int start) {
 		if(countLen(start) == 1) {
 			return 1;
@@ -99,6 +105,8 @@ public class Main {
 		
 		long ret = 0;
 		for(int next = start+1; next < n; next++) {
+			//처음시작 또는 다음 배열값이 현재값보다 크고
+			//현재 배열길이가 다음 배열값의 길이 +1(배열길이 값이 증가)한 경우
 			if((start == -1 || arr[start] < arr[next]) && 
 					(countLen(start) == countLen(next) + 1)) {
 				//check to overflow
@@ -112,24 +120,32 @@ public class Main {
 		return ret;
 	}
 	
-	static void find(int start, long skip, List<Integer> list) {		
+	//배열의 시작 인덱스, 넘어가야할 갯수로 list에 출력값 반환
+	static void find(int start, long skip, List<Integer> list) {
+		//초기 시작이 아닌경우 리스트에 값 저장
 		if(start != -1) {
 			list.add(arr[start]);
 		}
 		
+		//key : 다음 배열의 값, value : 다음 배열의 인덱스
 		HashMap<Integer, Integer> map = new HashMap<>();
 		for(int next = start+1; next < n; next++) {
+			//처음시작 또는 다음 배열값이 현재값보다 크고
+			//현재 배열길이가 다음 배열값의 길이 +1(배열길이 값이 증가)한 경우
 			if((start == -1 || arr[start] < arr[next]) && 
 					(countLen(start) == countLen(next) + 1)) {
 				map.put(arr[next], next);
 			}
 		}
 		
+		//다음배열의 값 정렬
 		Integer[] itemArr = map.keySet().toArray(new Integer[map.keySet().size()]);
 		Arrays.sort(itemArr);
 		
 		for(int item : itemArr) {
 			long cnt = count(map.get(item));
+			//최대 배열의 갯수가 넘어가야 할 갯수보다 작은경우
+			//넘어가야 할 갯수에서 빼고 다음 값 확인
 			if(cnt < skip) {
 				skip -= cnt;
 			} else {

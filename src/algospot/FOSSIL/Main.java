@@ -23,8 +23,12 @@ import java.util.List;
 0.000000
  */
 public class Main {
+	//두 블록껍질에 포함된 점의 수
 	static int n,m;
+	//블록껍질의 점 리스트, 주어진 입력이 시계 반대방향
 	static List<Point> hull1, hull2;
+	//x가 증가하면 아래쪽, x가 감소하면 위쪽 껍질임
+	//두 블록껍질에 대해 아래쪽 껍질과 위쪽 껍질을 저장함
 	static List<Point[]> upper, lower;
 	
 	static class Point { 
@@ -80,10 +84,12 @@ public class Main {
 		}
 	}
 	
+	//인접한 두 점에 대해 x가 증가하면 아래쪽, x가 감소하면 위쪽 껍질임
 	static void decompose(List<Point> pointList) {
 		int n = pointList.size();
 		for(int i = 0; i < n; i++) {
 			if(pointList.get(i).x < pointList.get((i+1)%n).x) {
+				//해당 점과 다음점을 배열로 넣음
 				lower.add(new Point[] {pointList.get(i), pointList.get((i+1)%n)});
 			} else if(pointList.get(i).x > pointList.get((i+1)%n).x) {
 				upper.add(new Point[] {pointList.get(i), pointList.get((i+1)%n)});
@@ -92,6 +98,7 @@ public class Main {
 	}
 	
 	static double solve() {
+		//껍질의 x,y 최대 최소값 검색
 		double y1Max = 0, y1Min = 987654321;
 		double y2Max = 0, y2Min = 987654321;
 		double x1Max = 0, x1Min = 987654321;
@@ -114,18 +121,17 @@ public class Main {
 		
 		//check y region overlap
 		if(!( (y1Max > y2Min) || (y2Max > y1Min) )) {
-			//System.out.println("y region not overlap");
 			return 0;
 		}
 		
 		//check x region overlap
 		if(!(Math.max(x1Min,  x2Min) < Math.min(x1Max, x2Max))) {
-			//System.out.println("x region not overlap");
 			return 0;
 		}
-		
+		//x값 최대 최소값 설정
 		double low = Math.max(x1Min,  x2Min), high = Math.min(x1Max, x2Max);
 		for(int i = 0 ; i < 100; i++) {
+			//삼분검색
 			double aab = (low*2+high)/3;
 			double abb = (low+high*2)/3;
 			
@@ -139,17 +145,19 @@ public class Main {
 		return Math.max(0, vertical(high));
 	}
 
+	//x에 대해 블록이 겹치는 부분의 최대높이 반환
+	//윗부분의 최소값 - 아랫부분 최대값
 	private static double vertical(double x) {
-		// TODO Auto-generated method stub
 		double minUpper = 987654321, maxLower = 0;
 		
-		//calculate minUpper
+		//두 블록껍질의 윗부분 y 최대값 찾기
 		for(int i = 0; i < upper.size(); i++) {
 			if(between(upper.get(i), x)) {
 				minUpper = Math.min(minUpper, getValue(upper.get(i), x));
 			}
 		}
 		
+		//두 블록껍질의 아랫부분 y 최소값 찾기
 		for(int i = 0; i < lower.size(); i++) {
 			if(between(lower.get(i), x)) {
 				maxLower = Math.max(maxLower, getValue(lower.get(i), x));
@@ -159,14 +167,13 @@ public class Main {
 		return minUpper - maxLower;
 	}
 	
+	//주어진 x값이 주어진 두 점 사이에 있는지 여부 반환
 	private static boolean between(Point[] points, double x) {
-		// TODO Auto-generated method stub
 		return ((points[0].x <= x) && (points[1].x >= x)) ||
 				((points[1].x <= x) && (points[0].x >= x));
 	}
-
+	//y=y0+(x-x0)*(dy/dx)
 	private static double getValue(Point[] points, double x) {
-		// TODO Auto-generated method stub
 		return points[0].y+(x-points[0].x)*(points[0].y-points[1].y)/(points[0].x-points[1].x);
 	}
 }

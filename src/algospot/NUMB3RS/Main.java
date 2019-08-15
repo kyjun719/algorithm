@@ -33,8 +33,11 @@ import java.util.Arrays;
 0.43333333 0.06666667 0.06666667 0.06666667
  */
 public class Main {
+	//n:마을수, d:지난일수, p:교도소 마을번호(시작점)
 	static int n,d,p;
+	//마을 연결 여부
 	static int[][] connected = new int[50][50];
+	//deg[i]:i번째 마을과 연결된 마을 갯수
 	static int[] deg = new int[50];
 	static double[][] cache = new double[50][100];
 	public static void main(String[] args) {
@@ -76,16 +79,19 @@ public class Main {
 	}
 	
 	static double search(int here, int days) {
+		//요일이 0일일때 감옥에 위치했으면 1, 아니면 0 반환
 		if(days == 0) {
 			return here == p? 1:0;
 		}
 		
+		//cache값 반환
 		if(cache[here][days] != -1) {
 			return cache[here][days];
 		}
 		
 		double ret = 0;
 		for(int there = 0; there < n; there++) {
+			//연결되어있으면 도착할 확률 계산
 			if(connected[here][there] == 1) {
 				ret += search(there, days-1)/deg[there];
 			}

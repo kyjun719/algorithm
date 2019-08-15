@@ -7,54 +7,50 @@ import java.util.Arrays;
 /**
  * @see https://algospot.com/judge/problem/read/QUANTIZE
  * @author jun
- * sample input
+ * input
 2
 10 3
 3 3 3 1 2 3 2 2 2 1
 9 3
 1 744 755 4 897 902 890 6 777
 
-  * sample output
+ * output
 0
 651
  */
 public class Main {
-	public int[] sum = new int[101];
-	public int[] sqSum = new int[101];
-	public int n;
-	public int[][] cache = new int[101][11];
-	public int INF = 987654321;
+	private static int[] sum = new int[101];
+	private static int[] sqSum = new int[101];
+	private static int n;
+	private static int[][] cache = new int[101][11];
+	private static int INF = 987654321;
 	
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			int c = Integer.parseInt(br.readLine());
 			for(int i = 0; i < c; i++) {
-				Main quantize = new Main();
 				String[] tmp = br.readLine().split(" ");
-				quantize.n = Integer.parseInt(tmp[0]);
+				n = Integer.parseInt(tmp[0]);
 				int parts = Integer.parseInt(tmp[1]);
 				String[] arr = br.readLine().split(" ");
-				int[] A = new int[quantize.n];
-				for(int j = 0; j < quantize.n; j++) {
+				int[] A = new int[n];
+				for(int j = 0; j < n; j++) {
 					A[j] = Integer.parseInt(arr[j]);
-					Arrays.fill(quantize.cache[j], -1);
+					Arrays.fill(cache[j], -1);
 				}
 				
 				Arrays.sort(A);
-				quantize.presum(A);
-				System.out.println(quantize.quantize(0, parts));
+				presum(A);
+				System.out.println(quantize(0, parts));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		//1 4 6 744 755 777 890 897 902
-		//4,759,896
-		//3,0,2,15,4,18,6,1,6
-		//9,0,4,225,16,324,36,1,36
 	}
 	
-	public void presum(int[] A) {
+	//에러 계산시 필요한 값들 미리 계산
+	public static void presum(int[] A) {
 		sum[0] = A[0];
 		sqSum[0] = A[0] * A[0];
 		for(int i = 1; i < A.length; i++ ) {
@@ -63,7 +59,8 @@ public class Main {
 		}
 	}
 	
-	public int error(int a, int b) {
+	//sum(a[i]-m)^2=sum(a[i]^2)-2m*sum(a[i])+(b+a-1)*m^2
+	public static int error(int a, int b) {
 		int SqSum = sqSum[b] - (a == 0? 0 : sqSum[a-1]);
 		int Sum = sum[b] - (a == 0? 0 : sum[a-1]);
 		int m = Math.round((float)Sum/(b-a+1));
@@ -71,11 +68,13 @@ public class Main {
 		return ret;
 	}
 	
-	public int quantize(int from, int parts) {
+	public static int quantize(int from, int parts) {
+		//다 묶은 경우
 		if(from == n) {
 			return 0;
 		}
 		
+		//묶음을 다 쓴 경우
 		if(parts == 0) {
 			return INF;
 		}
@@ -84,6 +83,7 @@ public class Main {
 			return cache[from][parts];
 		}
 		
+		//에러 최소값 탐색
 		int ret = INF;
 		for(int pt = 1; from+pt <= n; pt++) {
 			int val = error(from, from+pt-1) + quantize(from+pt, parts-1);

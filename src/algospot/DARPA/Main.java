@@ -51,6 +51,7 @@ public class Main {
 		//241/(2^23) < 0.0001
 		for(int i = 0; i < 25; i++) {
 			double mid = (low + high) / 2;
+			//n대를 mid 이상의 거리로 설치할 수 있는 경우
 			if(canSearch(n, location, mid)) {
 				low = mid;
 			} else {
@@ -61,10 +62,12 @@ public class Main {
 		return low;
 	}
 	
+	//dist 거리 이상으로 카메라를 n대 이상 설치할 수 있는지 여부 반환
 	static boolean canSearch(int n, double[] location, double dist) {
 		int cnt = 0;
 		double limit = -1;
 		for(int i = 0; i < location.length; i++) {
+			//카메라 위치가 설치 가능위치와 크거나 같은 경우 설치 후 다음 설치 위치로 바꿈
 			if(limit <= location[i]) {
 				cnt++;
 				limit = location[i] + dist;

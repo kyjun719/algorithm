@@ -55,10 +55,13 @@ public class Main {
 					double y = tmp[0];
 					double x = tmp[1];
 					double r = tmp[2];
+					//초소의 위치에 대한 각도값
 					double loc = ((Math.atan2(y, x)+2*Math.PI)%(2*Math.PI))*180/Math.PI;
+					//초소의 감시 범위에 따른 각도값
 					double theta = 2*Math.asin(r/16)*180/Math.PI;
 					rangeList.add(new Double[] {loc-theta, loc+theta});
 				}
+				//감시 각도값이 가장 작은 순서대로 정렬
 				rangeList.sort(new Comparator<Double[]>() {
 					@Override
 					public int compare(Double[] arg0, Double[] arg1) {
@@ -69,6 +72,8 @@ public class Main {
 				
 				int ret = 987654321;
 				for(int i = 0; i < n; i++) {
+					//초소의 감시 각도의 범위가 0을 지나는 경우
+					//해당 초소의 감시범위를 제외한 초소갯수의 최소값을 탐색함
 					if(rangeList.get(i)[0] <= 0 || rangeList.get(i)[1] >= 360) {
 						double start = rangeList.get(i)[1]%360;
 						double end = (rangeList.get(i)[0]+360)%360;
@@ -87,13 +92,17 @@ public class Main {
 		int used = 0;
 		while(start < end) {
 			double newStart = -1;
+			//이전 초소의 시작값이 탐색하는 초소의 시작값보다 큰 경우
+			//감시범위가 가장 넓은 초소 검색
 			while(idx < n && rangeList.get(idx)[0] <= start) {
 				newStart = Math.max(newStart, rangeList.get(idx)[1]);
 				idx++;
 			}
+			//새로 시작값을 못찾은 경우
 			if(newStart < start) {
 				return 987654321;
 			}
+			//다음 시작값 설정
 			start = newStart;
 			used++;
 		}

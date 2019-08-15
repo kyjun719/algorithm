@@ -51,6 +51,8 @@ public class Main {
 				String[] tmp = bf.readLine().split(" ");
 				n = Integer.parseInt(tmp[0]);
 				m = Integer.parseInt(tmp[1]);
+				
+				//이름들을 인덱스로 변환
 				List<String> nameList = Arrays.stream(bf.readLine().split(" "))
 						.collect(Collectors.toList());
 				eatList = new ArrayList<>(m);
@@ -63,7 +65,9 @@ public class Main {
 					String[] infoTmp = bf.readLine().split(" ");
 					for(int j = 1; j <= Integer.parseInt(infoTmp[0]); j++) {
 						int nameIdx = nameList.indexOf(infoTmp[j]);
-						eatList.get(i).add(nameIdx);	
+						//해당 음식을 먹을 수 있는 사람의 인덱스 추가
+						eatList.get(i).add(nameIdx);
+						//해당 사람의 먹을 수 있는 음식 인덱스 추가
 						canEatList.get(nameIdx).add(i);
 					}					
 				}
@@ -76,6 +80,7 @@ public class Main {
 	}
 	
 	static void search(int[] eatenArr, int foodCnt) {
+		//먹을수 있는 음식이 제일 적은 사람 탐색
 		int nextIdx = getMinimun(eatenArr);
 		
 		if(nextIdx == -1) {
@@ -87,11 +92,13 @@ public class Main {
 		List<Integer> eatableList = canEatList.get(nextIdx);
 		for(int i = 0; i < eatableList.size(); i++) {
 			int food = eatableList.get(i);
+			//해당 음식을 먹을수 있는 사람들 음식수 증가
 			List<Integer> eatablePeople = eatList.get(food);
 			for(int j : eatablePeople) {
 				eatenArr[j]++;
 			}
 			search(eatenArr, foodCnt+1);
+			//해당 음식을 먹을수 있는 사람들 음식수 감소
 			for(int j : eatablePeople) {
 				eatenArr[j]--;
 			}

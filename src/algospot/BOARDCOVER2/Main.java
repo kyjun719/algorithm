@@ -54,7 +54,7 @@ public class Main {
 				
 				board = new int[h][w];
 				answer = 0;
-				
+				//남은 칸수
 				int left = 0;
 				for(int i = 0; i < h; i++) {
 					String arrTmp = bf.readLine();
@@ -90,10 +90,12 @@ public class Main {
 	
 	static void setBlock(char[][] block) {
 		blockList = new ArrayList<>();
+		//입력받은 블록을 회전시켜 넣을수 있는 블록리스트 생성
 		for(int k = 0; k < 4; k++) {
 			int y = -1;
 			int x = -1;
 			List<Block> tmpBlock = new ArrayList<>();
+			//첫 점을 기준으로 블록의 상대위치를 나타낸 블록 생성
 			for(int i = 0; i < block.length; i++) {
 				for(int j = 0; j < block[0].length; j++) {
 					if(block[i][j] == '#') {
@@ -107,6 +109,7 @@ public class Main {
 				}
 			}
 
+			//비교를 위해 정렬
 			tmpBlock.sort(new Comparator<Block>() {
 				@Override
 				public int compare(Block arg0, Block arg1) {
@@ -114,10 +117,11 @@ public class Main {
 					return arg0.y - arg1.y;
 				}
 			});
-			
+			//해당 블록이 리스트에 없는 경우 추가
 			if(!blockList.contains(tmpBlock)) {
 				blockList.add(tmpBlock);
 			}
+			//블록을 반시계로 회전
 			char[][] nextBlock = new char[block[0].length][block.length];
 			for(int i = 0; i < block.length; i++) {
 				for(int j = 0; j < block[0].length; j++) {
@@ -126,11 +130,12 @@ public class Main {
 			}
 			block = nextBlock;
 		}
-		
+		//블록 하나가 차지하는 칸수
 		blockSize = blockList.get(0).size();
 	}
 	
 	static void search(int placed, int left) {
+		//현재 놓은 블록의 수보다 남는 칸이 없어 더 놓지 못하는 경우
 		if(answer >= placed + left/blockSize) {
 			return;
 		}
@@ -151,6 +156,7 @@ public class Main {
 			}
 		}
 		
+		//블록을 놓을 칸이 없는 경우
 		if(y == -1) {
 			answer = Math.max(answer, placed);
 			return;
@@ -158,6 +164,7 @@ public class Main {
 		
 		for(int p = 0; p < blockList.size(); p++) {
 			List<Block> block = blockList.get(p);
+			//판 내에 블록을 놓을 수 있는 지 확인
 			int k;
 			for(k = 0; k < blockSize; k++) {
 				int cy = y + block.get(k).y;
@@ -168,6 +175,7 @@ public class Main {
 			}
 			
 			if(k == blockSize) {
+				//판을 채우고 다음 블록을 놓음
 				for(int m = 0; m < blockSize; m++) {
 					int cy = y + block.get(m).y;
 					int cx = x + block.get(m).x;
@@ -175,7 +183,7 @@ public class Main {
 				}
 				
 				search(placed+1, left-blockSize);
-				
+				//놓은 블록 해제
 				for(int m = 0; m < blockSize; m++) {
 					int cy = y + block.get(m).y;
 					int cx = x + block.get(m).x;
@@ -184,6 +192,7 @@ public class Main {
 			}
 		}
 		
+		//블록을 놓지않고 넘어감
 		board[y][x] = 1;
 		search(placed, left-1);
 		board[y][x] = 0;

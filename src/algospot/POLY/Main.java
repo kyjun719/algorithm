@@ -7,7 +7,6 @@ import java.util.Arrays;
 /**
  * @see https://algospot.com/judge/problem/read/POLY
  * @author jun
- * poly(n, first) = sum(sec=1~n-first) (sec+first-1)*poly(n-first, sec)
  * input
 3
 2
@@ -45,6 +44,7 @@ public class Main {
 	
 	static int[][] cache = new int[101][101];
 	static int MOD = 10000000;
+	//poly(n, first) = sum(sec=1~n-first)(sec+first-1)*poly(n-first, sec)
 	public static int poly(int n, int first) {
 		if(n == first) {
 			return 1;

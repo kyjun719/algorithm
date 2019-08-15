@@ -60,17 +60,23 @@ import java.util.stream.Collectors;
 0 3 1 2 0 0 2 1
  */
 public class Main {
+	//bitmask로 값들의 합과 갯수를 저장함
 	static int[] calLen= new int[1024], calSum = new int[1024];
+	//숫자칸 여부 저장 배열
 	static int[][] color;
 	static int[][] value;
+	//hint[i][j][0 or 1] : (i,j)에 대해서 0일때 가로, 1일때 세로 힌트 
 	static int[][][] hint;
 	static int[][][] candidate = new int[10][46][1024];
 	static int n;
 	static HashMap<Integer, Hint> hintMap;
 	
 	static class Hint {
+		//해당 힌트의 현재 숫자 길이
 		int len;
+		//해당 힌트의 숫자 총 합
 		int sum;
+		//해당 힌트에 넣은 숫자들
 		int known;
 		
 		Hint(int len, int sum, int known) {
@@ -93,6 +99,7 @@ public class Main {
 		return calSum[tmp];
 	}
 	
+	//값에 대한 길이와 합 계
 	static void preLenAndSum() {
 		for(int val = 0; val < 1024; val++) {
 			for(int i = 0; i < 10; i++) {
@@ -104,6 +111,7 @@ public class Main {
 		}
 	}
 	
+	//길이, 합, 들어있는 숫자들이 있을때 들어갈 수 있는 숫자 후보 계산
 	static void preCal() {
 		for(int set = 0; set < 1024; set+=2) {
 			int len = getLen(set);
@@ -151,18 +159,22 @@ public class Main {
 						y = hintTmp[0];
 						x = hintTmp[1] - 1;
 					}
-
+					//hint에 대한 정보 저장(len, sum, known)
 					hintMap.put(i, new Hint(0, hintTmp[3], 0));
+					//가로 또는 세로줄에 해당 힌트 인덱스 삽입
 					while(true) {
+						//판 범위를 넘어간 경우 정지
 						if((y >= n || x >= n) || color[y][x] == 0) {
 							break;
 						}
+						//해당 힌트칸에 힌트 인덱스 넣음
 						hint[y][x][hintTmp[2]] = i;
 						if(hintTmp[2] == 0) {
 							x++;
 						} else {
 							y++;
 						}
+						//힌트 길이 추가
 						hintMap.get(i).len++;
 					}
 				}
@@ -179,8 +191,11 @@ public class Main {
 	}
 	
 	static int getCandidate(int y, int x) {
+		//세로 힌트
 		Hint tmpHint0 = hintMap.get(hint[y][x][0]);
+		//가로 힌트
 		Hint tmpHint1 = hintMap.get(hint[y][x][1]);
+		//세로 힌트와 가로힌트 공통 후보 반환
 		return candidate[tmpHint0.len][tmpHint0.sum][tmpHint0.known] &
 				 candidate[tmpHint1.len][tmpHint1.sum][tmpHint1.known];
 	}
@@ -189,6 +204,8 @@ public class Main {
 		int x = -1;
 		int y = -1;
 		int minCandidate = 1023;
+		
+		//값을 쓰지 않은 칸중 후보의 길이가 제일 짧은 칸 검색
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < n; j++) {
 				if(color[i][j] == 1 && value[i][j] == 0) {
@@ -202,28 +219,27 @@ public class Main {
 			}
 		}
 
+		//칸을 채울수 없는 경우
 		if(minCandidate == 0) {
 			return false;
 		}
 		
+		//칸을 다 채운경우 출력 후 종료
 		if(y == -1) {
 			printAnswer();
 			return true;
 		}
-		
-		List<Integer> candidateList = new ArrayList<>();
-		for(int i = 1; i <= 9; i++) {
-			if((minCandidate & (1 << i)) > 1) {
-				candidateList.add(i);
-			}
-		}
+
 
 		for(int val = 1; val <= 9; val++) {
 			if((minCandidate & (1 << val)) >= 1) {
+				//해당 칸에 숫자 입력
 				setValue(y,x,val);
+				//칸을 다 채운경우 종료
 				if(search()) {
 					return true;
 				}
+				//해당 칸에 숫자 삭제
 				removeValue(y,x,val);
 			}
 		}
@@ -241,13 +257,15 @@ public class Main {
 		return list.toString();
 	}
 	
+	//해당 칸에 숫자 입력
 	static void setValue(int y, int x, int val) {
 		for(int i = 0; i < 2; i++) {
 			hintMap.get(hint[y][x][i]).known += (1<<val);
 		}
 		value[y][x] = val;
 	}
-	
+
+	//해당 칸에 입력된 숫자 초기화
 	static void removeValue(int y, int x, int val) {
 		for(int i = 0; i < 2; i++) {
 			hintMap.get(hint[y][x][i]).known -= (1<<val);

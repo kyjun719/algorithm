@@ -45,9 +45,9 @@ public class Main {
 	static int m,q,n;
 	static List<String> words;
 	//B : 첫단어로 출현할 확률
+	static double[] B;
 	//T : i번째 단어 다음 j번째 단어가 출현할 확률
 	//M : i번째 단어를 j번째 단어로 분류할 확률
-	static double[] B;
 	static double[][] T,M;
 	//인식한 단어의 단어 리스트의 인덱스 배열
 	static int[] recog;
@@ -64,7 +64,7 @@ public class Main {
 			q = Integer.parseInt(mq[1]);
 
 			words = Arrays.asList(bf.readLine().split(" "));
-			
+			//확률은 로그값으로 저장
 			B = Arrays.stream(bf.readLine().split(" "))
 					.mapToDouble(Double::parseDouble)
 					.map(Math::log)
@@ -121,6 +121,7 @@ public class Main {
 	
 	static double MIN_MAX = -987654321;
 	static double recognize(int seg, int prev) {
+		//다 찾은 경우
 		if(seg == n) {
 			return 0;
 		}
@@ -131,8 +132,10 @@ public class Main {
 		
 		double ret = MIN_MAX;
 		int now_index = -1;
+		//처음일 경우 처음 나타날 확률, 아닐경우 i번째 단어 다음 j번째 단어가 출현할 확률 사용
 		double[] word_arr = prev == -1? B : T[prev];
 		for(int now = 0; now < m; now++) {
+			//now번째 단어를 seg번째 단어로 분류할 확률 + now번째 단어가 나타날 확률 
 			double cal_result = M[now][recog[seg]] + word_arr[now];
 			cal_result += recognize(seg+1, now);
 			if(ret < cal_result) {

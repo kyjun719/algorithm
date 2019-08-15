@@ -33,7 +33,7 @@ LOSING
 WINNING
  */
 public class Main {
-	static byte[] cache = new byte[1<<25];
+	static int[] cache = new int[1<<25];
 	static List<Integer> blockList = new ArrayList<>();
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -41,7 +41,7 @@ public class Main {
 		try {
 			int c = Integer.parseInt(bf.readLine());
 			for(int tc = 0; tc < c; tc++) {
-				Arrays.fill(cache, (byte) 0x00);
+				Arrays.fill(cache, 0);
 				
 				int board = 0;
 				
@@ -65,6 +65,7 @@ public class Main {
 	}
 	
 	static void preCal() {
+		//3칸짜리 L모양 블록 추가
 		for(int row = 0; row < 4; row++) {
 			for(int col = 0; col < 4; col++) {
 				int sum = 0;
@@ -81,6 +82,7 @@ public class Main {
 			}
 		}
 		
+		//2칸짜리 일자블록 추가
 		for(int i = 0; i < 5; i++) {
 			for(int j = 0; j < 4; j++) {
 				blockList.add(cell(i, j) + cell(i, j+1));
@@ -90,20 +92,23 @@ public class Main {
 	}
 	
 	static int game(int board) {
+		//cache값 확인
 		if(cache[board] != 0) {
 			return cache[board];
 		}
 		
 		int ret = 1;
 		for(int block : blockList) {
+			//판 안에 블록을 놓을 수 있는 경우
 			if((board & block) == 0) {
+				//상대방이 두지 못하면 승리할 수 있음
 				if(game(board | block) == 1) {
 					ret = 2;
 					break;
 				}
 			}
 		}
-		cache[board] = (byte) ret;
+		cache[board] = ret;
 		return ret;
 	}
 }

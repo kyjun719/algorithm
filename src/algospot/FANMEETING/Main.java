@@ -37,7 +37,7 @@ public class Main {
 				char[] fan = reader.readLine().toCharArray();
 				int[] int_members = new int[member.length];
 				int[] int_fans = new int[fan.length];
-				
+				//팬과 멤버는 역순으로 만나므로 팬을 역순으로 저장함
 				for(int i = 0; i < fan.length; i++) {
 					if(i < member.length) {
 						int_members[i] = member[i] == 'F' ? 0 : 1;
@@ -59,24 +59,37 @@ public class Main {
 		}
 	}
 	
+	/*
+	 * 카라추바 알고리즘
+	 * a*b = (a0+a1)*(b0+b1) = a0*b0 + a1*b0+a0*b1 + a1*b1
+	 *     = z0+z1+z2
+	 * z0 = a0*b0
+	 * z2 = a1*b1
+	 * z1 = (a0+a1)*(b0+b1)-z0-z2
+	 */
 	static int[] karatsuba(int[] a, int[] b) {
+		//a의 크기가 더 커야함
 		if(a.length < b.length) {
 			return karatsuba(b, a);
 		}
 
+		//길이가 0일경우 크기 0 배열 반환
 		if(a.length == 0 || b.length == 0) {
 			return new int[0];
 		}
 		
+		//두 배열의 길이가 1일경우 곱한값의 한자리 배열 반환
 		if(a.length == 1 && b.length == 1) {
 			int[] tmp = {a[0] * b[0]};
 			return tmp;
 		}
 		
+		//크기가 50이하일 경우 곱셉으로 계산
 		if(a.length <= 50) {
 			return multiply(a,b);
 		}
 		
+		//카라추바 곱셈
 		int half = a.length/2;
 		int[] a0 = Arrays.copyOfRange(a, 0, half);
 		int[] a1 = Arrays.copyOfRange(a, half, a.length);
@@ -117,6 +130,7 @@ public class Main {
 	}
 	
 	static int[] add_to(int[] a, int[] b, int ptr) {
+		//a의 크기가 작은경우 늘림
 		if(a.length < (b.length + ptr)) {
 			a = Arrays.copyOf(a, b.length + ptr);
 		}

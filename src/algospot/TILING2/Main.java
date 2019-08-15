@@ -22,6 +22,7 @@ public class Main {
 	static int MOD = 1000000007;
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		//칸을 채울수 있는 경우의 수 미리 계산
 		precal();
 		
 		int c;
@@ -40,6 +41,7 @@ public class Main {
 		}
 	}
 	
+	//2xn을 채우는 경우의 수 = 1칸을 채운 후 n-1칸을 채우는 경우의 수 + 2칸을 채운 후 n-2칸을 채우는 경우의 수
 	public static void precal() {
 		tiling[1] = 1;
 		tiling[2] = 2;

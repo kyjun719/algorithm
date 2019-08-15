@@ -70,6 +70,7 @@ public class Main {
 		}
 		
 		int ret = 987654321;
+		//3~5개씩 나눠서 난이도 계산
 		for(int i = 3; i <= 5; i++) {			
 			if(i+idx <= n) {
 				int calVal = calculateVal(Arrays.copyOfRange(arr, idx, idx+i))+
@@ -82,9 +83,9 @@ public class Main {
 	}
 	
 	private static int calculateVal(int[] arr) {
-		// TODO Auto-generated method stub
 		int size = arr.length;
 		
+		//같은수인지 확인
 		boolean isSame = true;
 		for(int i = 1; i < size; i++) {
 			if(arr[i] != arr[i-1]) {
@@ -97,7 +98,9 @@ public class Main {
 			return 1;
 		}
 		
+		//등차수열 여부
 		boolean isProgress = true;
+		//숫자가 번갈아 나오는지 여부
 		boolean isTemp = true;
 		for(int i = 1; i < size; i++) {
 			if(arr[i] - arr[i-1] != arr[1] - arr[0]) {

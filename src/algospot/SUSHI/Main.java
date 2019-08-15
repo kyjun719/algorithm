@@ -32,9 +32,13 @@ import java.util.List;
 1631925
  */
 public class Main {
+	//100의 배수이므로 입력값/100
 	static int[] price = new int[20];
+	//초밥의 선호도
 	static int[] need = new int[20];
+	//초밥 갯수
 	static int n;
+	//예산/100
 	static int m;
 	
 	public static void main(String[] args) {
@@ -60,13 +64,16 @@ public class Main {
 		}
 	}
 	
+	//초밥 가격은 1~200으로 먹기 이전의 최대 만족도는 (현재예산-가격)%201번째에 저장됨
 	static int[] cache = new int[201];
 	static int getNeed() {
 		cache[0] = 0;
 		int ret = 0;
+		//1부터 최대 예산까지 대한 최대 만족도 계산
 		for(int budget = 1; budget <= m; budget++) {
 			int cand = 0;
 			for(int i = 0; i < n; i++) {
+				//초밥 가격이 예산안일때 먹었을때와 먹지 않았을때의 최대 선호도 구함 
 				if(budget >= price[i]) {
 					cand = Math.max(cand, cache[(budget-price[i])%201] + need[i]);
 				}

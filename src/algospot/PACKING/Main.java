@@ -37,10 +37,15 @@ xbox
 grinder
  */
 public class Main {
+	//전체 물건 갯수
 	static int n;
+	//캐리어 용량
 	static int w;
+	//물건 이름 배열
 	static String[] name = new String[100];
+	//물건 부피 배열
 	static int[] weight = new int[100];
+	//물건 필요도 배열
 	static int[] need = new int[100];
 	static int[][] cache = new int[100][1000];
 	public static void main(String[] args) {
@@ -81,8 +86,9 @@ public class Main {
 		if(cache[item_idx][capacity] != -1) {
 			return cache[item_idx][capacity];
 		}
-		
+		//해당 물건을 넣지 않았을때의 최대 필요도
 		int not_in = packing(capacity, item_idx+1);
+		//해당 물건을 넣을때의 최대 필요도
 		int in = 0; 
 		
 		if(capacity >= weight[item_idx]) {
@@ -93,14 +99,16 @@ public class Main {
 		return cache[item_idx][capacity];
 	}
 	
+	//가방에 들어가는 물건들 이름을 nameList로 반환 
 	static void reconstruct(int capacity, int item_idx, List<String> nameList) {
 		if(item_idx == n) {
 			return;
 		}
-		
+		//해당물건을 안넣었을때 최대 필요도가 변하지 않은 경우
 		if(packing(capacity, item_idx) == packing(capacity, item_idx+1)) {
 			reconstruct(capacity, item_idx+1, nameList);
 		} else {
+			//해당물건이 필요한 경우
 			nameList.add(name[item_idx]);
 			reconstruct(capacity - weight[item_idx], item_idx+1, nameList);
 		}

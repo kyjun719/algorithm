@@ -31,6 +31,7 @@ helloworld
 cadabrac
  */
 public class Main {
+	//overlap[i][j] : i번째 단어의 뒷부분과 j번째 단어의 앞부분의 겹치는 길이
 	static int[][] overlap = new int[16][16];
 	static int[][] cache = new int[16][1<<16];
 	static int k;
@@ -51,6 +52,7 @@ public class Main {
 				Arrays.fill(cache[k], -1);
 				Arrays.fill(overlap[k], -1);
 				
+				//입력 단어 리스트중 단어간 중복 제거
 				while(true) {
 					boolean isRemoved = false;
 					for(int i = 0; i < k; i++) {
@@ -71,12 +73,14 @@ public class Main {
 				
 				words.add(k, "");
 				
+				//단어간 중복 길이 검색
 				for(int i = 0; i <= k; i++) {
 					for(int j = 0; j <= k; j++) {
 						overlap[i][j] = getOverlap(words.get(i), words.get(j));
 					}
 				}
 				
+				//겹치는 부분의 최대값 검색
 				maxOverlap(k, 0);
 
 				System.out.println(getWord(k, 0));
@@ -86,6 +90,7 @@ public class Main {
 		}
 	}
 	
+	//단어간 중복 길이 검색, a의 뒷부분과 b의 앞부분 검색
 	static int getOverlap(String a, String b) {
 		for(int len = Math.min(a.length(), b.length()); len > 0; len--) {
 			if(a.substring(a.length() - len).equals(b.substring(0, len))) {
@@ -95,8 +100,10 @@ public class Main {
 		return 0;
 	}
 	
+	//겹치는 문자열 길이의 최대값 검색
 	static int maxOverlap(int now, int used) {
-		if(used == (1<<k) -1) {
+		//모든 단어 검색
+		if(used == (1<<k)-1) {
 			return 0;
 		}
 		
@@ -106,6 +113,7 @@ public class Main {
 		
 		int ret = 0;
 		for(int next = 0; next < k; next++) {
+			//해당 단어 미사용시 겹쳐지는 부분이 최대인값 검색
 			if((used & (1<<next)) == 0) {
 				ret = Math.max(ret, maxOverlap(next, used | 1<<next) + overlap[now][next]);
 			}
@@ -115,18 +123,21 @@ public class Main {
 		return ret;
 	}
 	
+	//
 	static String getWord(int last, int used) {
-		if(used == ((1<<k) - 1)) {
+		//모든 단어 검색시
+		if(used == ((1<<k)-1)) {
 			return "";
 		}
 		
 		for(int next = 0; next < k; next++) {
+			//해당 단어 미사용시
 			if((used & (1<<next)) == 0) {
 				int usedLength = maxOverlap(next, used | 1<<next) + overlap[last][next];
+				//현재 단어의 최대 겹치는 길이가 최대값일때 다음 단어의 겹치는 부분이 정답의 일부임
 				if(usedLength == maxOverlap(last,used)) {
 					String tmp = words.get(next).substring(overlap[last][next]);
-					return tmp
-							+ getWord(next, used | (1<<next));
+					return tmp + getWord(next, used | (1<<next));
 				}
 			}
 		}

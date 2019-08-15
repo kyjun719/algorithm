@@ -61,9 +61,11 @@ public class Main {
 		}
 		
 		int ret = 0;
+		//오른쪽으로 내려가는 값이 더 작은 경우
 		if(path(y+1, x) >= path(y+1, x+1)) {
 			ret += count(y+1, x);
 		}
+		//오른쪽으로 내려가는 값이 더 큰 경우
 		if(path(y+1, x) <= path(y+1, x+1)) {
 			ret += count(y+1, x+1);
 		}
@@ -80,7 +82,7 @@ public class Main {
 		if(cache[y][x] != -1) {
 			return cache[y][x];
 		}
-		
+		//바로 내려가거나 오른쪽으로 내려갔을때의 최대값 계산
 		int ret = Math.max(path(y+1, x), path(y+1, x+1)) + arr[y][x];
 		cache[y][x] = ret;
 		return ret;

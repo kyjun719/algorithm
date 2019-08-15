@@ -8,6 +8,7 @@ import java.util.Arrays;
  * @see https://algospot.com/judge/problem/read/BOGGLE
  * @author jun
  * input
+2
 1
 URLPM
 XPRET
@@ -31,6 +32,7 @@ PANDORA NO
 GIAZAPX YES
  */
 public class Main {	
+	//cache[i][j][k] : 판 (i,j) 글자가 k번째 글자일때 단어 연결 가능 여부
 	static int[][][] cache = new int[5][5][10];
 	static char[][] board;
 	public static void main(String[] args) {
@@ -69,6 +71,7 @@ public class Main {
 		boolean result = false;
 		for(int i = 0; i < 5; i++) {
 			for(int j = 0; j < 5; j++) {
+				//판의 글자와 단어의 첫글자가 맞는경우 해당 단어를 연결할 수 있는지 확인
 				if(board[i][j] == ch) {
 					result = search(j,i,word,0);
 					if(result) {
@@ -83,30 +86,31 @@ public class Main {
 		return result;
 	}
 	
-	static int[] dy = {-1,-1,-1,0,0,0,1,1,1};
-	static int[] dx = {-1,0,1,-1,0,1,-1,0,1};
+	static int[] dy = {-1,-1,-1, 0,0, 1,1,1};
+	static int[] dx = {-1, 0, 1,-1,1,-1,0,1};
 	static boolean search(int x, int y, String word, int idx) {
+		//다 연결한 경우 참 반
 		if(word.length()-1 == idx) {
 			return true;
 		}
 		
+		//이전에 계산한 값이 있는 경우 계산값 반환
 		if(cache[y][x][idx] != -1) {
 			return cache[y][x][idx] == 1;
 		}
 		
 		char nextch = word.charAt(idx+1);
 		
-		for(int i = 0; i < 9; i++) {
+		//8방향으로 탐색
+		for(int i = 0; i < dy.length; i++) {
 			int ny = y + dy[i];
 			int nx = x + dx[i];
-			if(nx == x && ny == y) {
-				continue;
-			}
-			
+			//판 범위 확인
 			if(nx > 4 || nx < 0 || ny > 4 || ny < 0) {
 				continue;
 			}
 			
+			//다음 글자를 연결할 수 있는 경우
 			if(nextch == board[ny][nx]) {
 				if(search(nx, ny, word, idx+1)) {
 					cache[y][x][idx] = 1;

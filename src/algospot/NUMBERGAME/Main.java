@@ -46,6 +46,7 @@ public class Main {
 	}
 	
 	static int game(int left, int right) {
+		//숫자를 다 뽑았을 때 0 반환
 		if(left > right) {
 			 return 0;
 		}
@@ -54,9 +55,11 @@ public class Main {
 			 return cache[left][right];
 		}
 		
+		//좌우 하나씩 뽑았을 때 최대 점수
 		int ret = MIN;
 		ret = Math.max(arr[left] - game(left+1, right), arr[right] - game(left, right - 1));
 		
+		//양쪽 2개를 지울수 있는 경우 지웠을때의 점수
 		if(right - left + 1 >= 2) {
 			ret = Math.max(ret, -game(left, right-2));
 			ret = Math.max(ret, -game(left+2, right));

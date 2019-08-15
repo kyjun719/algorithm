@@ -22,6 +22,7 @@ import java.util.Arrays;
 public class Main {
 	//just calculate
 	static int[] num = new int[10000001];
+	//2~10000001까지 약수 갯수 계산
 	private static void preCal() {
 		Arrays.fill(num, 1);
 		
@@ -34,55 +35,11 @@ public class Main {
 		}
 	}
 	
-	//use Eratosthenes' sieve
-	//in submit, runtime error occur
-	/*
-	static int MAX_N = 10000001;
-	static int[] minFactor = new int[MAX_N];
-	static int[] minFactorPower = new int[MAX_N];
-	static int[] factor = new int[MAX_N];
-	private static void preCal2() {
-		for(int i = 2; i < MAX_N; i++) {
-			minFactor[i] = i;
-		}
-		
-		int n = (int)Math.sqrt(MAX_N);
-		for(int i = 2; i <= n; i++) {
-			if(minFactor[i] == i) {
-				for(int j = i*i; j < MAX_N; j+= i) {
-					if(minFactor[j] == j) {
-						minFactor[j] = i;
-					}
-				}
-			}
-		}
-		
-		factor[1] = 1;
-		for(int i = 2; i < MAX_N; i++) {
-			if(minFactor[i] == i) {
-				minFactorPower[i] = 1;
-				factor[i] = 2;
-			} else {
-				int p = minFactor[i];
-				int m = (int) i/p;
-				if(p != minFactor[m]) {
-					minFactorPower[i] = 1;
-				} else {
-					minFactorPower[i] = minFactorPower[m]+1;
-				}
-				int a = minFactorPower[i];
-				factor[i] = (int)(factor[m]/a)*(a+1);
-			}
-		}
-	}
-	*/
-	
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
 			preCal();
-			//preCal2();
 			
 			int tc = Integer.parseInt(bf.readLine());
 			
@@ -92,9 +49,9 @@ public class Main {
 						.toArray();
 				int n = info[0];
 				int cnt = 0;
+				//범위내에서 약수갯수 확인
 				for(int i = info[1]; i <= info[2]; i++) {
 					if(num[i] == n) {
-					//if(factor[i] == n) {
 						cnt++;
 					}
 				}

@@ -43,10 +43,12 @@ public class Main {
 	}
 	
 	static double snail(int days, int meter) {
+		//끝까지 올라간 경우
 		if(meter >= n) {
 			return 1;
 		}
 		
+		//해당 날짜가 지났을때 끝까지 올라갔는지 여부 반환
 		if(days == m) {
 			return meter >= n? 1 : 0;
 		}
@@ -55,6 +57,7 @@ public class Main {
 			return cache[days][meter];
 		}
 		
+		//비가 올 확률이 75%이므로 0.25*(+1미터)+0.75*(+2미터)로 끝까지 올라갈 확률 계산
 		double ret = 0.25*snail(days+1, meter+1) + 0.75*snail(days+1, meter+2);
 		cache[days][meter] = ret;
 		

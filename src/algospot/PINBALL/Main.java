@@ -40,17 +40,18 @@ public class Main {
 		double inner(Vector v) {
 			return x*v.x+y*v.y;
 		}
-		Vector getUnit() {
+		Vector normalize() {
 			return new Vector(x/this.norm(), y/this.norm());
 		}
 		Vector mul(double c) {
 			return new Vector(x*c, y*c);
 		}
 		Vector proj(Vector b) {
-			Vector tmp = b.getUnit();
+			Vector tmp = b.normalize();
 			return tmp.mul(tmp.inner(this));
 		}
 	}
+	
 	static class Circle {
 		Vector c;
 		double r;
@@ -59,6 +60,7 @@ public class Main {
 			this.r = r;
 		}
 	}
+	
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -67,7 +69,9 @@ public class Main {
 				int[] arr = Arrays.stream(br.readLine().split(" "))
 						.mapToInt(Integer::parseInt)
 						.toArray();
+				//현재 공위치
 				Vector p = new Vector(arr[0], arr[1]);
+				//공의 방향
 				Vector d = new Vector(arr[2], arr[3]);
 				int n = arr[4];
 				Circle[] circleArr = new Circle[n];
@@ -75,6 +79,8 @@ public class Main {
 					int[] tmp = Arrays.stream(br.readLine().split(" "))
 							.mapToInt(Integer::parseInt)
 							.toArray();
+					//두 장애물 사이에 2이하가 없으므로 공의 반지름을 0으로 하고
+					//원들의 반지름을 1씩 증가시킴
 					circleArr[i] = new Circle(new Vector(tmp[0], tmp[1]), tmp[2]+1);
 				}
 				List<Integer> answer = solve(p,d,circleArr);
@@ -85,9 +91,10 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	
 	private static List<Integer> solve(Vector p, Vector d, Circle[] circleArr) {
 		List<Integer> ret = new ArrayList<>();
-		d = d.getUnit();
+		d = d.normalize();
 		for(int i = 0; i < 100; i++) {
 			double[] tmp = getCollision(p,d,circleArr);
 			if(tmp[0] == -1) {
@@ -102,11 +109,13 @@ public class Main {
 		
 		return ret;
 	}
+	
 	private static double INF = 987654321;
+	//공과 충돌하는 원과 충돌하는 시간 반환
 	private static double[] getCollision(Vector p, Vector d, Circle[] circleArr) {
-		// TODO Auto-generated method stub
 		double t = INF;
 		double ret = -1;
+		//충돌시간이 가장 빠른 원 검색
 		for(int i = 0; i < circleArr.length; i++) {
 			double calT = getCollisionTime(p,d,circleArr[i]);
 			if(t > calT) {
@@ -116,8 +125,9 @@ public class Main {
 		}
 		return new double[] {ret, t};
 	}
+	
+	//d*d*t^2+2(p-c)*d*t+c*c+p*p-2(c*p)-r^2=0
 	private static double getCollisionTime(Vector p, Vector d, Circle circle) {
-		// TODO Auto-generated method stub
 		Vector cc = circle.c;
 		double a = d.inner(d);
 		double b = 2*(p.inner(d)-cc.inner(d));
@@ -133,14 +143,15 @@ public class Main {
 		double ret2 = (-b+Math.sqrt(dis))/(2*a);
 		return ret1 < 0 ? INF : ret1;
 	}
+	
+	//q점에서 원 충돌시 나가는 방향벡터 반환
 	private static Vector getNewD(Vector d, Vector q, Circle circle) {
-		// TODO Auto-generated method stub
 		Vector n = q.minus(circle.c);
-		return d.minus(d.proj(n).mul(2)).getUnit();
-	}
-	private static Vector getNewP(Vector p, Vector d, double e) {
-		// TODO Auto-generated method stub
-		return p.plus(d.mul(e));
+		return d.minus(d.proj(n).mul(2)).normalize();
 	}
 	
+	//p+dt로 공과 원이 충돌하는 지점 반환
+	private static Vector getNewP(Vector p, Vector d, double e) {
+		return p.plus(d.mul(e));
+	}
 }

@@ -122,8 +122,6 @@ public class Main {
 		
 		//System.out.println("("+a+","+b+")="+ab+",("+c+","+d+")="+cd);
 		//(ab), (cd)가 일직선상에 있는 경우, x범위와 y범위가 교차하는지를 반환함
-		//TODO
-		//왜 !인가?
 		if((ab == 0) && (cd == 0)) {
 			return !disjoint(a.x, b.x, c.x, d.x) && 
 					!disjoint(a.y, b.y, c.y, d.y);
@@ -132,6 +130,7 @@ public class Main {
 		return ab <= 0 && cd <= 0;
 	}
 	
+	//각점의 영역이 겹치지 않는지 반환
 	static boolean disjoint(double a, double b, double c, double d) {
 		if(a > b) {
 			double tmp = a;
@@ -147,17 +146,19 @@ public class Main {
 		
 		return b < c || d < a;
 	}
-	
+	//다각형의 겹침여부 반환
 	private static boolean checkPloygonIntersects(
 			List<Vector> p, List<Vector> q) {
 		int n = p.size();
 		int m = q.size();
 		
+		//한 다각형이 다른 다각형에 포함되지 않는지 확인
 		if(isInside(p.get(0), q) || 
 				isInside(q.get(0), p)) {
 			return true;
 		}
 		
+		//다각형의 모든 선분들에 대해 교차 여부 확인
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < m; j++) {
 				if(segmentIntersects(p.get(i), p.get((i+1)%n),
@@ -218,6 +219,7 @@ public class Main {
 
 	private static List<Vector> getWrap(List<Vector> list) {
 		List<Vector> wrap = new ArrayList<>();
+		//x값이 작은순으로 정렬
 		list.sort(new Comparator<Vector>() {
 			@Override
 			public int compare(Vector arg0, Vector arg1) {
@@ -240,6 +242,7 @@ public class Main {
 				double cross = Vector.ccw(distVector, nextVector, list.get(i));
 				double dist = (nextVector.minus(distVector)).norm()-
 						(list.get(i).minus(distVector)).norm();
+				//가장 왼쪽이 있거나 일직선상의 경우 가장 먼 점을 찾음
 				if(cross > 0 || (cross == 0 && dist < 0)) {
 					nextVector = list.get(i);
 				}

@@ -38,6 +38,8 @@ public class Main {
 				long p = m*100/n;
 				p += 1;
 				//c(100-(p+1))=(p+1)*n-100*m
+				//연승 수 c = ((p+1)*n-100*m)/(100-(p+1))
+				//현재 승률이 100%일 경우 승률을 올릴수 없음
 				System.out.println(p >= 100 ? -1 : ceil(p*n-100*m, 100-p));
 			}
 		} catch(Exception e) {
