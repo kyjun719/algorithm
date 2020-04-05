@@ -4,33 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/BOGGLE
- * @author jun
- * input
-2
-1
-URLPM
-XPRET
-GIAET
-XTNZY
-XOQRS
-6
-PRETTY
-GIRL
-REPEAT
-KARA
-PANDORA
-GIAZAPX
-
- * output
-PRETTY YES
-GIRL YES
-REPEAT YES
-KARA NO
-PANDORA NO
-GIAZAPX YES
- */
 public class Main {	
 	//cache[i][j][k] : 판 (i,j) 글자가 k번째 글자일때 단어 연결 가능 여부
 	static int[][][] cache = new int[5][5][10];
@@ -44,9 +17,7 @@ public class Main {
 				board = new char[5][5];
 				for(int i = 0; i < 5; i++) {
 					String tmp = br.readLine();
-					for(int j = 0; j < 5; j++) {
-						board[i][j] = tmp.charAt(j);
-					}
+					board[i] = tmp.toCharArray();
 				}
 				
 				int n = Integer.parseInt(br.readLine());
@@ -75,12 +46,9 @@ public class Main {
 				if(board[i][j] == ch) {
 					result = search(j,i,word,0);
 					if(result) {
-						break;
+						return result;
 					}
 				}
-			}
-			if(result) {
-				break;
 			}
 		}
 		return result;

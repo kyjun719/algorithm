@@ -15,27 +15,6 @@ import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-/**
- * @see https://algospot.com/judge/problem/read/NERD2
- * @author jun
- * input
-2
-4
-72 50
-57 67
-74 55
-64 60
-5
-1 5
-2 4
-3 3
-4 2
-5 1
-
- * output
-8
-15
- */
 public class Main {
 	private static TreeMap<Integer, Integer> pointMap;
 	public static void main(String[] args) {
@@ -59,11 +38,14 @@ public class Main {
 		}
 	}
 	
+	//현재 참가자수 계산
 	private static int register(int p, int q) {
+		//(p,q)가 지배 당하는점이면 추가하지 않음
 		if(isDominated(p, q)) {
 			return pointMap.size();
 		}		
 		
+		//(p,q에 지배당하는점 삭제)
 		removeDominated(p, q);
 		
 		pointMap.put(p, q);

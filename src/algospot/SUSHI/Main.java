@@ -7,30 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/SUSHI
- * @author jun
- * input
-2
-6 10000
-2500 7
-3000 9
-4000 10
-5000 12
-10000 20
-15000 1
-6 543975612
-2500 7
-3000 9
-4000 10
-5000 12
-10000 20
-15000 1
-
- * output
-28
-1631925
- */
 public class Main {
 	//100의 배수이므로 입력값/100
 	static int[] price = new int[20];

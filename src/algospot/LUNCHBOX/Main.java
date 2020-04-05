@@ -7,35 +7,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/LUNCHBOX
- * @author jun
- * input
-2
-3
-2 2 2
-2 2 2
-3
-1 2 3
-1 2 1
-
- * output
-8
-7
- */
-/*
- * 1) 데우는 시간 : m1+m2<m3, 먹는 시간 : e1=e2=e3
- * -> m1+m2+m3+e3 ? m1+m3+m2+e2 => 동일
- * 2) 데우는 시간 : m1=m2=m3, 먹는 시간 : e1+e2<e3
- * -> m1+m2+m3+e3 ? m1+m3+m2+e2 =>
- * 2.1) e3 > m2+e2 => m1+m2+m3+e3 > (m1+m3+e3 > m1+m3+m2+e2)
- * 2.2) e3 < m2+e2 => e3 > e2이므로 m1+m2+m3+e3 > m1+m3+m2+e2
- * 3) 데우는 시간 : m1+m2<m3, 먹는 시간 : e1+e2<e3
- *  -> m1+m2+m3+e3 ? m1+m3+m2+e2 =>
- * 3.1) e3 > m2+e2 => m1+m2+m3+e3> (m1+m3+e3 > m1+m3+m2+e2)
- * 3.2) e3 < m2+e2 => e3 > e2이므로 m1+m2+m3+e3 > m1+m3+m2+e2
- * 따라서 먹는 시간이 길수록 먼저 먹어야 이득
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

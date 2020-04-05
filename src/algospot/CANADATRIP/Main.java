@@ -4,23 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/CANADATRIP
- * @author jun
- * input
-2
-3 15
-500 100 10
-504 16 4
-510 60 6
-2 1234567
-8030000 8030000 1
-2 2 1
-
- * output
-480
-1234563
- */
 public class Main {
 	//l : 시작점으로부터의 거리, m : 표지판 출력 시작 위치, g : 표지판간 거리
 	static int[] l, m, g;

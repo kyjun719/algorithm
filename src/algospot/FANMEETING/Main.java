@@ -7,26 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/FANMEETING
- * @author jun
- * input
-4
-FFFMMM
-MMMFFF
-FFFFF
-FFFFFFFFFF
-FFFFM
-FFFFFMMMMF
-MFMFMFFFMMMFMF
-MMFFFFFMFFFMFFFFFFMFFFMFFFFMFMMFFFFFFF
-
- * output
-1
-6
-2
-2
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -47,6 +27,7 @@ public class Main {
 				
 				int[] ret = karatsuba(int_members, int_fans);
 				int cnt = 0;
+				//남남일 경우에만 1이므로 이경우는 동시에 포옹을 하지 않은경우
 				for(int j = int_members.length - 1; j < int_fans.length; j++) {
 					if(ret[j] == 0) {
 						cnt++;

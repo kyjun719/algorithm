@@ -4,19 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/POLY
- * @author jun
- * input
-3
-2
-4
-92
- * output
-2
-19
-4841817
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

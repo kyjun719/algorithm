@@ -78,11 +78,11 @@ public class Main {
 			cal[i] = avg*c[i] - r[i];
 		}
 		
-		//등수가 높은순으로 정렬
+		//등수가 낮은순으로 정렬
 		Arrays.sort(cal);
 		
 		double sum = 0;
-		//철회한 과목을 제외한 평균등수 계산
+		//철회한 과목을 제외한 평균등수 계산, 높은순부터 더함
 		for(int i = n-1; i >= n-k; i--) {
 			sum += cal[i];
 		}

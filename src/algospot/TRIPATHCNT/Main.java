@@ -4,25 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/TRIPATHCNT
- * @author jun
- * input
-2
-4
-1
-1 1 
-1 1 1 
-1 1 1 1 
-4
-9
-5 7
-1 3 2
-3 5 5 6
- * output
-8
-3
- */
 public class Main {
 	static int n;
 	static int[][] arr = new int[101][101];

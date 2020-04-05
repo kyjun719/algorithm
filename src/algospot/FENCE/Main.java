@@ -6,23 +6,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Stack;
 
-/**
- * @see https://algospot.com/judge/problem/read/FENCE
- * @author jun
- * input
-3
-7
-7 1 5 9 6 7 3
-7
-1 4 4 4 4 1 1
-4
-1 8 2 2
-
- * output
-20
-16
-8
- */
 public class Main {
 	private static int[] fence;
 	private static int n;
@@ -49,14 +32,18 @@ public class Main {
 		}
 		
 		int mid = (left + right) / 2;
+		//중간값을 기준으로 왼쪽과 오른쪽중 최대값 계산
 		int ret = Math.max(solve(left, mid), solve(mid + 1, right));
 		
 		int start = mid;
 		int end = mid + 1;
 		int height = Math.min(fence[start], fence[end]);
+		//중간값과 바로 옆값으로 최대값 비교
 		ret = Math.max(ret, height * 2);
 		
+		//비교 범위의 끝까지
 		while((start > left) || (end < right)) {
+			//왼쪽이 끝에 도달했거나 왼쪽값이 오른쪽값 보다 작은경우
 			if((end < right) && ((start == left) || (fence[start - 1] < fence[end + 1]))) {
 				end++;
 				height = Math.min(height, fence[end]);
@@ -78,7 +65,9 @@ public class Main {
 		int ret = 0;
 		int[] newFence = Arrays.copyOf(fence, n+1);
 		//System.out.println(Arrays.toString(newFence));
+		//순서대로 순회
 		for(int i = 0; i < newFence.length; i++) {
+			//저장된 위치값이 없거나 이전값의 높이가 더 낮을때까지
 			while(!heightStack.isEmpty() && 
 					newFence[heightStack.lastElement()] >= newFence[i]) {
 				int j = heightStack.lastElement();

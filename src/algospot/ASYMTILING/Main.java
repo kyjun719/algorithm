@@ -3,20 +3,6 @@ package algospot.ASYMTILING;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * @see https://algospot.com/judge/problem/read/ASYMTILING
- * @param args  
- * 
- * input
-3
-2
-4
-92
- * output
-0
-2
-913227494
- */
 public class Main {
 	static int[] asynctiling = new int[101];
 	static int MOD = 1000000007;

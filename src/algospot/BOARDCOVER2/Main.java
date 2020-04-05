@@ -10,32 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @see https://algospot.com/judge/problem/read/BOARDCOVER2
- * @author jun
- * input
-2
-4 7 2 3
-##.##..
-#......
-#....##
-#..####
-###
-#..
-5 10 3 3
-..........
-..........
-..........
-..........
-..........
-.#.
-###
-..#
-
- * output
-3
-8
- */
 public class Main {
 	static int[][] board;
 	static int h,w,r,c,blockSize,answer;
@@ -222,7 +196,10 @@ public class Main {
 		
 		@Override
 		public int hashCode() {
-			return super.hashCode() + x*31 + y;
+			int ret = 17;
+			ret = ret*31 + y;
+			ret = ret*31 + x;
+			return ret;
 		}
 		
 		public String toString() {return "[" + y + "," + x + "]";}

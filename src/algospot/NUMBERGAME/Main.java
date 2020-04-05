@@ -4,23 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/NUMBERGAME
- * @author jun
- * input 
-3
-5
--1000 -1000 -3 -1000 -1000 
-6
-100 -1000 -1000 100 -1000 -1000 
-10
-7 -5 8 5 1 -4 -8 6 7 9 
-
- * output
--1000
-1100
-7
- */
 public class Main {
 	static int[] arr;
 	static int[][] cache = new int[50][50];

@@ -4,23 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/DARPA
- * @author jun
- * input
-3
-2 4 
-80 100 120 140 
-4 4 
-80 100 120 140.00
-4 7 
-0 70 90 120 200 210 220
-
- * output
-60.00
-20.00
-50.00
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

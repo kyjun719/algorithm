@@ -6,40 +6,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-/**
- * @see https://algospot.com/judge/problem/read/DICTIONARY
- * @author jun
- *
- * input
-3
-3
-ba
-aa
-ab
-5
-gg
-kia
-lotte
-lg
-hanhwa
-6
-dictionary
-english
-is
-ordered
-ordinary
-this
-
-* output
-INVALID HYPOTHESIS
-ogklhabcdefijmnpqrstuvwxyz
-abcdefghijklmnopqrstuvwxyz
- */
 public class Main {
+	//입력한 단어 목록
 	static ArrayList<String> words;
+	//간선의 인접 리스트
 	static ArrayList<Integer>[] adj;
+	//정점 방문여부
 	static boolean[] visited;
+	//입력받은 단어 갯수
 	static int n;
+	//dfs가 끝난 순서를 저장하는 리스트
 	static ArrayList<Integer> order;
 	public static void main(String[] args) {
 		try {
@@ -51,8 +27,9 @@ public class Main {
 				for(int i = 0; i < n; i++) {
 					words.add(br.readLine());
 				}
-				
+				//글자간 간선 저장
 				getGraph();
+				//DAG 생성 및 역전
 				String ret = getOrder();
 				System.out.println(ret.isEmpty()?"INVALID HYPOTHESIS":ret);
 			}
@@ -60,6 +37,7 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	//글자간 간선 생성
 	private static void getGraph() {
 		adj = new ArrayList[26];
 		for(int i = 0; i < 26; i++) {
@@ -70,7 +48,9 @@ public class Main {
 			String word1 = words.get(i-1);
 			String word2 = words.get(i);
 			for(int k = 0; k < Math.min(word1.length(), word2.length()); k++) {
+				//k번째의 글자가 틀린경우 해당 간선 저장
 				if(word1.charAt(k) != word2.charAt(k)) {
+					//a->b로 가는 간선 생성 
 					int a = word1.charAt(k)-'a';
 					int b = word2.charAt(k)-'a';
 					adj[a].add(b);
@@ -80,17 +60,21 @@ public class Main {
 		}
 	}
 	
+	//DAG 생성 및 역전
 	private static String getOrder() {
 		int n = adj.length;
 		visited = new boolean[n];
 		order = new ArrayList<>();
-		for(int i = n-1; i >= 0; i--) {
+		//dfs
+		for(int i = 0; i < n; i++) {
 			if(!visited[i]) {
 				dfs(i);
 			}
 		}
 		
+		//위상정렬을 위해 dfs가 끝난 순서 역전
 		Collections.reverse(order);
+		//사이클이 없는지 확인
 		for(int i = 0; i < order.size(); i++) {
 			for(int j = i+1; j < order.size(); j++) {
 				if(adj[order.get(j)].contains(order.get(i))) {
@@ -99,6 +83,7 @@ public class Main {
 			}
 		}
 		
+		//숫자를 문자로 바꿈
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < order.size(); i++) {
 			sb.append(String.valueOf((char)(order.get(i)+'a')));

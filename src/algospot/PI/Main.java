@@ -7,24 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * 
- * @author jun
- * input
-5
-12341234
-11111222
-12122222
-22222222
-12673939
-
- * output
-4
-2
-5
-2
-14
- */
 public class Main {
 	static int MAX = 987654321;
 	static int n;

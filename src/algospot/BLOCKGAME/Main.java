@@ -6,32 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/BLOCKGAME
- * @author jun
- * input
-3
-.....
-.##..
-##..#
-#.###
-..#..
-.....
-.....
-.....
-.....
-.....
-#..##
-##.##
-##.##
-#...#
-##.##
-
- * output
-WINNING
-LOSING
-WINNING
- */
 public class Main {
 	static int[] cache = new int[1<<25];
 	static List<Integer> blockList = new ArrayList<>();

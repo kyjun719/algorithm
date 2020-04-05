@@ -7,33 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @see https://algospot.com/judge/problem/read/ALLERGY
- * @author jun
- * input
-2
-4 6
-cl bom dara minzy
-2 dara minzy
-2 cl minzy
-2 cl dara
-1 cl
-2 bom dara
-2 bom minzy
-10 7
-a b c d e f g h i j
-6 a c d h i j
-3 a d i
-7 a c f g h i j
-3 b d g
-5 b c f h i
-4 b e g j
-5 b c g h i
-
- * output
-2
-3
- */
 public class Main {
 	static int n, m, answer;
 	//j번 음식을 먹을수 있는 사람들

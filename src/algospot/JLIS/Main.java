@@ -6,26 +6,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/JLIS
- * @author jun
- * input
-3
-3 3
-1 2 4
-3 4 7
-3 3
-1 2 3
-4 5 6
-5 3
-10 20 30 1 2
-10 20 30
-
- * output
-5
-6
-5
- */
 public class Main {
 	//행렬 a,b의 길이
 	private static int m, n;
@@ -33,28 +13,26 @@ public class Main {
 	private static int[] a, b;
 	private static long[][] cache;
 	public static void main(String[] args) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int c;
 		try {
-			c = Integer.parseInt(reader.readLine());
-			for(int i = 0; i < c; i++) {
-				String tmp = reader.readLine();
+			c = Integer.parseInt(br.readLine());
+			for(int tc = 0; tc < c; tc++) {
+				String tmp = br.readLine();
 				n = Integer.parseInt(tmp.split(" ")[0]);
 				m = Integer.parseInt(tmp.split(" ")[1]);
 				a = new int[n];
 				b = new int[m];
 				cache = new long[n + 1][m + 1];
 				
-				String[] a_tmp = reader.readLine().split(" ");
-				for(int j = 0; j < a_tmp.length; j++) {
-					a[j] = Integer.parseInt(a_tmp[j]);
-					Arrays.fill(cache[j], -1);
-				}
-				Arrays.fill(cache[n], -1);
-				
-				String[] b_tmp = reader.readLine().split(" ");
-				for(int j = 0; j < b_tmp.length; j++) {
-					b[j] = Integer.parseInt(b_tmp[j]);
+				a = Arrays.stream(br.readLine().split(" "))
+						.mapToInt(Integer::parseInt)
+						.toArray();
+				b = Arrays.stream(br.readLine().split(" "))
+						.mapToInt(Integer::parseInt)
+						.toArray();
+				for(int i = 0; i <= n; i++) {
+					Arrays.fill(cache[i], -1);
 				}
 				
 				System.out.println(jlis(-1, -1) - 2);
@@ -67,8 +45,8 @@ public class Main {
 	
 	static long jlis(int a_pos, int b_pos) {
 		//이전 탐색값이 있는경우 이전 탐색값 반환
-		if(cache[a_pos + 1][b_pos + 1] != -1) {
-			return cache[a_pos + 1][b_pos + 1];
+		if(cache[a_pos+1][b_pos+1] != -1) {
+			return cache[a_pos+1][b_pos+1];
 		}
 		long a_max = a_pos == -1 ? Long.MIN_VALUE : a[a_pos];
 		long b_max = b_pos == -1 ? Long.MIN_VALUE : b[b_pos];
@@ -90,7 +68,7 @@ public class Main {
 			}
 		}
 		
-		cache[a_pos + 1][b_pos + 1] = ret;
+		cache[a_pos+1][b_pos+1] = ret;
 		return ret;
 	}
 }

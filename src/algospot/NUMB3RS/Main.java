@@ -4,34 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/NUMB3RS
- * @author jun
- * input
-2
-5 2 0
-0 1 1 1 0
-1 0 0 0 1
-1 0 0 0 0
-1 0 0 0 0
-0 1 0 0 0
-3
-0 2 4
-8 2 3
-0 1 1 1 0 0 0 0
-1 0 0 1 0 0 0 0
-1 0 0 1 0 0 0 0
-1 1 1 0 1 1 0 0
-0 0 0 1 0 0 1 1
-0 0 0 1 0 0 0 1
-0 0 0 0 1 0 0 0
-0 0 0 0 1 1 0 0
-4
-3 1 2 6
- * output
-0.83333333 0.00000000 0.16666667
-0.43333333 0.06666667 0.06666667 0.06666667
- */
 public class Main {
 	//n:마을수, d:지난일수, p:교도소 마을번호(시작점)
 	static int n,d,p;

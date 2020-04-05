@@ -4,21 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/SNAIL
- * @author jun
- * input
-4
-5 4
-5 3
-4 2
-3 2
- * output
-0.9960937500
-0.8437500000
-0.5625000000
-0.9375000000
- */
 public class Main {
 	static int n, m;
 	static double[][] cache = new double[1001][1001];

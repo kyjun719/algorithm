@@ -8,18 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * @see https://algospot.com/judge/problem/read/JOSEPHUS
- * @author jun
- * input
-2
-6 3
-40 3
-
- * output
-3 5
-11 26
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -67,6 +55,7 @@ public class Main {
 		
 		while(soldier.size() > 2) {
 			soldier.poll();
+			//현재부터 k-1의 인덱스는 사라지지 않으므로 다시 뒤로 보냄
 			for(int i = 0; i < k-1; i++) {
 				soldier.add(soldier.poll());
 			}

@@ -6,20 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-/**
- * @see https://algospot.com/judge/problem/read/BRACKETS2
- * @author jun
- * input
-3
-()()
-({[}])
-({}[(){}])
-
- * output
-YES
-NO
-YES
- */
 public class Main {
 	private static List<Character> opening = Arrays.asList('(','{','[');
 	private static List<Character> closing = Arrays.asList(')','}',']');

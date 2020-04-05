@@ -7,26 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @see https://algospot.com/judge/problem/read/MATCHORDER
- * @author jun
- * input
-3
-6
-3000 2700 2800 2200 2500 1900
-2800 2750 2995 1800 2600 2000
-3
-1 2 3
-3 2 1
-4
-2 3 4 5
-1 2 3 4
-
- * output
-5
-3
-3
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

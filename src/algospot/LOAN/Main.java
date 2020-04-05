@@ -3,22 +3,6 @@ package algospot.LOAN;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * @see https://algospot.com/judge/problem/read/LOAN
- * @author jun
- * input
-4
-20000000 12 6.8
-35000000 120 1.1
-40000000 36 0.5
-100 120 0.1
-
- * output
-1728691.4686372071
-308135.8967737053
-1119696.7387703573
-0.8375416659
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

@@ -8,40 +8,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/NERDS
- * @author jun
- * input
-3
-8
-1 2 3 
-1 3 4
-1 4 5
-1 2 5
-0 4 1
-0 5 5
-0 3 3
-0 4 4
-6
-1 1 5
-1 5 1
-1 1 1
-0 2 2
-0 4 1
-0 1 4
-6
-1 10 10
-0 10 10
-1 5 15
-1 5 5
-0 15 15
-0 15 5
-
- * output
-THEORY HOLDS
-THEORY IS INVALID
-THEORY IS INVALID
- */
 public class Main {
 	static class Vector {
 		double x,y;

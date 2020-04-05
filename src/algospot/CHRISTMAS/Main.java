@@ -4,17 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/CHRISTMAS
- * @author jun
- * input
-1
-6 4
-1 2 3 4 5 6
-
- * output
-3 1
- */
 public class Main {
 	static int n,k;
 	static int[] d;
@@ -64,18 +53,15 @@ public class Main {
 		int[] ret = new int[n+1];
 		int[] prevLoc = new int[k];
 		Arrays.fill(prevLoc, -1);
+		prevLoc[psum[0]] = 0;
 		
-		for(int i = 0; i <= n; i++) {
+		for(int i = 1; i <= n; i++) {
 			//i번째 상자를 사지 않은경우 최대값은 ret[i-1]
-			if(i > 0) {
-				ret[i] = ret[i-1];
-			} else {
-				ret[i] = 0;
-			}
-			
 			//i번째 상자를 산 경우 최대값은 psum[i]와 같은 psum값을 가진 상자의 최대값+1
 			if(prevLoc[psum[i]] != -1) {
-				ret[i] = Math.max(ret[i], ret[prevLoc[psum[i]]]+1);
+				ret[i] = Math.max(ret[i-1], ret[prevLoc[psum[i]]]+1);
+			} else {
+				ret[i] = ret[i-1];
 			}
 			prevLoc[psum[i]] = i;
 		}

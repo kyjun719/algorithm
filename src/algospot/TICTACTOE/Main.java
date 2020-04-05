@@ -6,26 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/TICTACTOE
- * @author jun
- * input
-3
-...
-...
-...
-xx.
-oo.
-...
-xox
-oo.
-x.x
-
- * output
-TIE
-x
-o
- */
 public class Main {
 	//i는 판정보로 한칸에 x일경우1, o일경우2를 더해 총 저장해야 하는 판의 갯수는 3^9 
 	static int cache[] = new int[19683];

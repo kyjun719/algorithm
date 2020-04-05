@@ -4,20 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/MORSE
- * @author jun
- * input
-3
-2 2 4
-4 8 13
-6 4 1
-
- * output
-o--o
---o-ooo-oooo
-------oooo
- */
 public class Main {
 	//c[i][j] : 조합순열
 	static long[][] C = new long[201][201];

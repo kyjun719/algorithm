@@ -3,22 +3,6 @@ package algospot.DRAGON;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * @see https://algospot.com/judge/problem/read/DRAGON
- * @author jun
- * input
-4
-0 1 2
-1 1 5
-2 6 5
-42 764853475 30
-
- * output
-FX 
-FX+YF 
-+FX-Y 
-FX-YF-FX+YF+FX-YF-FX+YF-FX-YF- 
- */
 public class Main {
 	static int[] dragonLen = new int [51];
 	public static void main(String[] args) {

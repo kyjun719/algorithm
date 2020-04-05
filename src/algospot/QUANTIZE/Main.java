@@ -4,20 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/QUANTIZE
- * @author jun
- * input
-2
-10 3
-3 3 3 1 2 3 2 2 2 1
-9 3
-1 744 755 4 897 902 890 6 777
-
- * output
-0
-651
- */
 public class Main {
 	private static int[] sum = new int[101];
 	private static int[] sqSum = new int[101];

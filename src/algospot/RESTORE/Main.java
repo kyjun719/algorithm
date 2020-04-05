@@ -8,28 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/RESTORE
- * @author jun
- * input
-3
-3
-geo
-oji
-jing
-2
-world
-hello
-3
-abrac
-cadabra
-dabr
-
- * output
-geojing
-helloworld
-cadabrac
- */
 public class Main {
 	//overlap[i][j] : i번째 단어의 뒷부분과 j번째 단어의 앞부분의 겹치는 길이
 	static int[][] overlap = new int[16][16];
@@ -70,9 +48,8 @@ public class Main {
 						break;
 					}
 				}
-				
+
 				words.add(k, "");
-				
 				//단어간 중복 길이 검색
 				for(int i = 0; i <= k; i++) {
 					for(int j = 0; j <= k; j++) {

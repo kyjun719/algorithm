@@ -4,32 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/GRADUATION
- * @author jun
- * input
-2
-4 4 4 4
-0
-1 0
-3 0 1 3
-0
-4 0 1 2 3 
-4 0 1 2 3
-3 0 1 3
-4 0 1 2 3
-4 2 2 4
-1 1
-0
-1 3
-1 2
-3 0 2 3
-3 1 2 3
-
- * output
-3
-IMPOSSIBLE
- */
 public class Main {
 	//n:전공과목수, k:들어야할 과목수, m:학기수, l:한학기에 최대로 들을수 있는 과목수
 	private static int n, k, m, l;

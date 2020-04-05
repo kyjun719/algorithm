@@ -6,21 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/PINBALL
- * @author jun
- * input
-1
-5 5 1 1 5
-22 40 12
-61 26 20
-19 78 21
-51 86 7
-84 57 15
-
- * output
-0 1 2 1 2 0 3 4
- */
 public class Main {
 	static class Vector {
 		double x,y;

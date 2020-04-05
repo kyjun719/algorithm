@@ -7,29 +7,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/FORTRESS
- * @author jun
- * input
-2
-3
-5 5 15
-5 5 10
-5 5 5
-8
-21 15 20
-15 15 10
-13 12 5
-12 12 3
-19 19 2
-30 24 5
-32 10 7
-32 9 4
-
- * output
-2
-5
- */
 public class Main {
 	//성벽 객체
 	static class Wall {
@@ -91,6 +68,7 @@ public class Main {
 		return node;
 	}
 	
+	//b가 a에 포함되는지 확인
 	static boolean isSubWall(int a, int b) {
 		//포함하는지 확인
 		if(!isEncloses(wallList.get(a), wallList.get(b))) {
@@ -99,6 +77,7 @@ public class Main {
 		
 		//a번째 성벽이 b번째 성벽을 직접 포함하는지 확인
 		for(int i = 0; i < n; i++) {
+			//a와 b사이에 i번째 성벽이 있는지 확인
 			if(i != a && i != b && 
 					isEncloses(wallList.get(a), wallList.get(i)) && 
 					isEncloses(wallList.get(i), wallList.get(b))) {
@@ -110,6 +89,9 @@ public class Main {
 	
 	//성벽 a가 성벽 b를 포함하는지 확인
 	static boolean isEncloses(Wall a, Wall b) {
+		//포함하는 조건
+		//1) a의 반지름이 b의 반지름보다 큼
+		//2) b의 중점이 a의 반지름에서 b의 반지름을 뺀 영역안에 있어야함 
 		return (a.r > b.r) && (getDist(a, b) < sqr(a.r - b.r));
 	}
 	
@@ -124,7 +106,9 @@ public class Main {
 	//트리 높이와 잎간 길이중 최대값 반환
 	private static int solve(Wall root) {
 		longest = 0;
+		//트리의 높이 계산
 		int height = getHeight(root);
+		//잎간 거리와 트리 높이중 최대값 반환
 		return Math.max(longest, height);
 	}
 
@@ -133,6 +117,7 @@ public class Main {
 		List<Wall> subWallList = root.subWallList;
 		int n = subWallList.size();
 		int[] heightArr = new int[n];
+		//루트에서 각 자손들의 트리 높이 계산
 		for(int i = 0; i < n; i++) {
 			heightArr[i] = getHeight(subWallList.get(i));
 		}
@@ -143,9 +128,10 @@ public class Main {
 		
 		Arrays.sort(heightArr);
 		if(n >= 2) {
+			//최대 잎간 거리 = 루트에서 해당 잎 까지의 높이 = 서브트리의 최대 높이값 2개 + 2
 			longest = Math.max(longest, heightArr[n-2]+heightArr[n-1]+2);
 		}
-		
+		//트리 높이 = 서브트리의 높이 + 1
 		return heightArr[n-1]+1;
 	}
 }

@@ -6,22 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/FOSSIL
- * @author jun
- * input
-2
-5 5
-35.74 35.85 69.64 50.00 73.52 82.55 43.50 92.22 17.67 76.18
-16.47 8.02 60.98 14.62 66.80 37.74 45.89 67.22 13.04 55.19
-4 3
-73.84 11.41 71.61 32.72 39.87 38.84 22.41 17.87
-75.13 51.64 47.72 87.34 15.97 64.56
-
- * output
-27.6529680365
-0.000000
- */
 public class Main {
 	//두 블록껍질에 포함된 점의 수
 	static int n,m;

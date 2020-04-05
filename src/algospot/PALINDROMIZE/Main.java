@@ -3,20 +3,6 @@ package algospot.PALINDROMIZE;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-/**
- * @see https://algospot.com/judge/problem/read/PALINDROMIZE
- * @author jun
- * input
-3
-there
-amanaplanacanal
-xyz
-
- * output
-7
-21
-5
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -63,7 +49,7 @@ public class Main {
 		return 0;
 	}
 
-	//해당 문장에서 접미사와 접두사가 같은 최대 길이 반환
+	//해당 문장에서 접미사와 접두사가 같은 최대 길이 반환(부분 일치 테이블)
 	private static int[] getPartialMathes(String b) {
 		int n = b.length();
 		int begin=1, matched=0;

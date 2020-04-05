@@ -9,26 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-/**
- * @see https://algospot.com/judge/problem/read/KLIS
- * @author jun
- * input
-3
-9 2
-1 9 7 4 2 6 3 11 10
-8 4
-2 1 4 3 6 5 8 7
-8 2
-5 6 7 8 1 2 3 4
-
- * output
-4
-1 2 3 11
-4
-1 3 6 8
-4
-5 6 7 8
- */
 public class Main {
 	//전체 배열 길이
 	static int n;
@@ -142,6 +122,7 @@ public class Main {
 		Integer[] itemArr = map.keySet().toArray(new Integer[map.keySet().size()]);
 		Arrays.sort(itemArr);
 		
+		//작은 순서대로 최대 LIS의 갯수 검색
 		for(int item : itemArr) {
 			long cnt = count(map.get(item));
 			//최대 배열의 갯수가 넘어가야 할 갯수보다 작은경우

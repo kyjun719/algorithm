@@ -6,36 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @see  https://algospot.com/judge/problem/read/PACKING
- * @author jun
- * input
-2
-6 10
-laptop 4 7
-camera 2 10
-xbox 6 6
-grinder 4 7
-dumbell 2 5
-encyclopedia 10 4
-6 17
-laptop 4 7
-camera 2 10
-xbox 6 6
-grinder 4 7
-dumbell 2 5
-encyclopedia 10 4
- * output
-24 3
-laptop
-camera
-grinder
-30 4
-laptop
-camera
-xbox
-grinder
- */
 public class Main {
 	//전체 물건 갯수
 	static int n;

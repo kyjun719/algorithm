@@ -7,22 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @see  https://algospot.com/judge/problem/read/ZIMBABWE
- * @author jun
- * input
-4
-321 3
-123 3
-422 2
-12738173912 7
- 
- * output
-5
-0
-2
-11033
- */
 public class Main {
 	static int n, m;
 	static int[] nowPrice;

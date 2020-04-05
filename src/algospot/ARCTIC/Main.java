@@ -11,29 +11,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-/**
- * @see https://algospot.com/judge/problem/read/ARCTIC
- * @author jun
- * input
-2
-5
-0 0
-1 0
-1 1
-1 2
-0 2
-6
-1.0 1.0
-30.91 8
-4.0 7.64
-21.12 6.0
-11.39 3.0
-5.31 11.0
-
- * output
-1.00
-10.18
- */
 public class Main {
 	//기지들 점을 나타내는 클래스
 	static class Point {

@@ -51,17 +51,17 @@ public class Main {
 		
 		double[] answer = new double[n];
 		//극점을 찾기위해 미분값의 해 검색
-		double[] difArr = solve(n-1, getDiff(num));
+		double[] extremePoint = solve(n-1, getDiff(num));
 		//극점간의 구간에서 함수가 증가인지 감소인지
-		boolean[] isPlus = getPlus(difArr, getDiff(num));
+		boolean[] isIncrease = calcIsIncrease(extremePoint, getDiff(num));
 		
-		for(int i = 0; i <= difArr.length; i++) {
+		for(int i = 0; i <= extremePoint.length; i++) {
 			if(i == 0) {
-				answer[i] = getAnswer(-10, difArr[i], num, isPlus[i]);
-			} else if(i == difArr.length) {
-				answer[i] = getAnswer(difArr[i-1], 10, num, isPlus[i]);
+				answer[i] = getAnswer(-10, extremePoint[i], num, isIncrease[i]);
+			} else if(i == extremePoint.length) {
+				answer[i] = getAnswer(extremePoint[i-1], 10, num, isIncrease[i]);
 			} else {
-				answer[i] = getAnswer(difArr[i-1], difArr[i], num, isPlus[i]);
+				answer[i] = getAnswer(extremePoint[i-1], extremePoint[i], num, isIncrease[i]);
 			}
 		}
 		
@@ -70,25 +70,24 @@ public class Main {
 	}
 
 	//미분된 방정식 계수와 극점값으로 기울기가 양수인지 음수인지 반환
-	private static boolean[] getPlus(double[] difArr, double[] diff) {
-		boolean[] ret = new boolean[difArr.length+1];
+	private static boolean[] calcIsIncrease(double[] extremePoint, double[] diff) {
+		boolean[] ret = new boolean[extremePoint.length+1];
 		for(int i = 0; i < ret.length; i++) {
+			double middle;
 			if(i == 0) {
-				double tmp = (-10 + difArr[i])/2;
-				ret[i] = isHigh(tmp, diff);
+				middle = (-10 + extremePoint[i])/2;
 			} else if(i == ret.length - 1) {
-				double tmp = (10 + difArr[i-1])/2;
-				ret[i] = isHigh(tmp, diff);
+				middle = (10 + extremePoint[i-1])/2;
 			} else {
-				double tmp = (difArr[i-1] + difArr[i])/2;
-				ret[i] = isHigh(tmp, diff);
+				middle = (extremePoint[i-1] + extremePoint[i])/2;
 			}
+			ret[i] = isPlusValue(middle, diff);
 		}
 		return ret;
 	}
 	
 	//x범위의 중간값으로 방정식의 미분값이 양수이면 해당 구간은 증가, 음수이면 감소
-	private static boolean isHigh(double mid, double[] num) {
+	private static boolean isPlusValue(double mid, double[] num) {
 		double ret = num[num.length-1];
 		double nextMid = mid;
 		for(int i = num.length-2; i >= 0; i--) {
@@ -98,15 +97,15 @@ public class Main {
 		return ret >= 0;
 	}
 
-	private static double getAnswer(double start, double end, double[] num, boolean isPlus) {
+	private static double getAnswer(double start, double end, double[] num, boolean isIncrease) {
 		//[start, end]구간에서 해의 이분검색
 		double low = start;
 		double high = end;
 		for(int i = 0; i < 100; i++) {
 			double mid = (low + high) / 2;
 			//값이 0보다 클때
-			if(isHigh(mid, num)) {
-				if(isPlus) {
+			if(isPlusValue(mid, num)) {
+				if(isIncrease) {
 					//증가 구간인 경우
 					high = mid;
 				} else {
@@ -114,7 +113,7 @@ public class Main {
 					low = mid;
 				}
 			} else {
-				if(isPlus) {
+				if(isIncrease) {
 					//증가 구간인 경우
 					low = mid;
 				} else {

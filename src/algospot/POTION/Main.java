@@ -5,26 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/POTION
- * @author jun
- * input
-3
-4
-4 6 2 4
-6 4 2 4
-4
-4 6 2 4
-7 4 2 4
-3
-4 5 6
-1 2 3
-
- * output
-0 5 1 2
-1 8 2 4
-3 3 3
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));

@@ -5,26 +5,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
 
-/**
- * @see https://algospot.com/judge/problem/read/HABIT
- * @author jun
- * input
-4
-2
-uhmhellouhmmynameislibe
-3
-banana
-1
-thatsagoodquestion
-3
-hello
-
- * output
-3
-1
-18
-0
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -48,15 +28,15 @@ public class Main {
 		
 		int ret = 0;
 		for(int i = 0; i+k <= n; i++) {
-			//사전순으로 정렬된 접미사배열에서 k개의 접미사중 중복되는 단어의 최대길이 계산
-			ret = Math.max(ret, getCommonSuffix(s, suffix[i], suffix[i+k-1]));
+			//사전순으로 정렬된 접미사배열에서 k개의 접미사중 중복되는 접두사의 최대길이 계산
+			ret = Math.max(ret, getCommonPrefix(s, suffix[i], suffix[i+k-1]));
 		}
 		
 		return ret;
 	}
 
 	//문자열 s의 부분문자열의 최대 중복길이 반환
-	private static int getCommonSuffix(String s, int i, int j) {
+	private static int getCommonPrefix(String s, int i, int j) {
 		int k = 0;
 		while(i < s.length() && j < s.length() && s.charAt(i) == s.charAt(j)) {
 			i++; j++; k++;
@@ -74,7 +54,7 @@ public class Main {
 			group[i] = s.charAt(i);
 		}
 		
-		//문자열 순서를 나타내는 배열
+		//사전별로 정리된 접미사의 문자열내 인덱스 값을 가진 배열
 		Integer[] perm = new Integer[n];
 		for(int i = 0; i< n; i++) {
 			perm[i] = i;
@@ -104,7 +84,7 @@ public class Main {
 			}
 			group = newGroup;
 		}
-		
+
 		return perm;
 	}
 	
@@ -120,9 +100,9 @@ public class Main {
 		//문자열 비교
 		@Override
 		public int compare(Integer o1, Integer o2) {
-			//현재 글자가 다르면 비교
+			//현재 글자의 그룹값이 다르면 비교
 			if(group[o1] != group[o2]) return group[o1]-group[o2];
-			//다음 t번째 글자 비교
+			//현재 글자의 그룹값이 같을때 다음 t번째 글자의 그룹값 비교
 			return group[o1+t]-group[o2+t];
 		}
 	}

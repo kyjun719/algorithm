@@ -4,19 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * @see https://algospot.com/judge/problem/read/TILING2
- * @author jun
- * input
-3
-1
-5
-100
- * output
-1
-8
-782204094
- */
 public class Main {
 	static int[] tiling = new int[101];
 	static int MOD = 1000000007;

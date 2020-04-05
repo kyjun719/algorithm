@@ -5,25 +5,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @see https://algospot.com/judge/problem/read/JAEHASAFE
- * @author jun
- *	input
-2
-3
-abbab
-babab
-ababb
-bbaba
-2
-RMDCMRCD
-MRCDRMDC
-DCMRCDRM
-
- * output
-6
-10
- */
 public class Main {
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -84,7 +65,7 @@ public class Main {
 		return 0;
 	}
 
-	//문장에서 접두사와 접미사가 같은 길이 배열 반환
+	//문장에서 접두사와 접미사가 같은 길이 배열 반환(부분 일치 테이블)
 	private static int[] getPatialMatches(String b) {
 		int n = b.length();
 		int[] p = new int[n];

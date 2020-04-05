@@ -4,28 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-/**
- * @see https://algospot.com/judge/problem/read/MORDOR
- * @author jun
- * input
-2
-3 1
-1 2 3
-0 2
-10 4
-3 9 5 6 10 8 7 1 2 4 
-1 6
-4 7
-9 9
-5 8
-
- * output
-2
-5
-9
-0
-7
- */
 public class Main {
 	static class RMQ {
 		//구간별 최소값
@@ -37,7 +15,9 @@ public class Main {
 			n = arr.length;
 			rangeMin = new int[n*4];
 			rangeMax = new int[n*4];
+			//구간별 최소값 계산
 			init(arr, 0, n-1, 1, true);
+			//구간별 -를 곱한 배열의 최소값 계산
 			init(mul(arr, -1), 0, n-1, 1, false);
 		}
 
@@ -113,7 +93,7 @@ public class Main {
 					int[] path = Arrays.stream(br.readLine().split(" "))
 							.mapToInt(Integer::parseInt)
 							.toArray();
-					
+					//구간값이 작은것을 시작값으로 해야함
 					if(path[0] > path[1]) {
 						int tmp = path[0];
 						path[0] = path[1];
