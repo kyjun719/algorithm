@@ -1,4 +1,4 @@
-package acmicpc._1697;
+package acmicpc._1325;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

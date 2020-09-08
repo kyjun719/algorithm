@@ -60,7 +60,6 @@ while Q:
   for i in Q:
     d[i].add(i)
     for j in scc_inv[i]:
-      # d[j]|=d[i]
       d[j]=d[j].union(d[i])
       scc_outd[j]-=1
       if scc_outd[j]==0:

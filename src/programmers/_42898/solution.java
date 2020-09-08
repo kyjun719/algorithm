@@ -1,3 +1,5 @@
+package programmers._42898;
+
 import java.util.*;
 class Solution {
     public int[][] cache;

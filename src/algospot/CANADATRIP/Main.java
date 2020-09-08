@@ -55,11 +55,11 @@ public class Main {
 		return high;
 	}
 
-	//모든 도시들을 돌면서 현재 거리에서 몇개의 표지판이 남아있는지 확인후 반환
+	//모든 도시들을 돌면서 현재 거리에서 몇개의 표지판을 보았는지 확인후 반환
 	private static boolean canShow(int dist) {
 		int cnt = 0;
 		for(int i = 0; i < n; i++) {
-			//현재 위치에서 해당 도시의 표지판을 볼 수 있는경우
+			//현재 위치에서 해당 도시의 표지판을 지나온 경우
 			if(dist >= l[i] - m[i]) {
 				cnt += (Math.min(dist, l[i]) - (l[i] - m[i]))/g[i] + 1;
 			}

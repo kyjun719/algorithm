@@ -34,8 +34,8 @@ LCS(longest common subsequence)는 NP문제지만, 문자열의 길이가 상수
 LCS는 다음과 같음
 
 ```
-                0 if i==0 or j == 0
-LCS(X_i, Y_i) = LCS(X_i-1, Y_j-1)+x_i if i,j>0 and x_i == y_i
+LCS(X_i, Y_i) = 0 if i==0 or j == 0
+                LCS(X_i-1, Y_j-1)+x_i if i,j>0 and x_i == y_i
                 max(LCS(X_i, Y_j-1), LCS(X_i-1, Y_j)) if i_j>0 and x_i != y_i
 
 ```
