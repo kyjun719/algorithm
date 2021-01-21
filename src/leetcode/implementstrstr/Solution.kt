@@ -55,4 +55,18 @@ class Solution {
         }
         return -1
     }
+	
+	fun strStr2(haystack: String, needle: String): Int {
+        if(needle.length==0){
+            return 0
+        }
+        var nh=needle.hashCode()
+        var len=needle.length
+        for(i in 0..haystack.length-needle.length){
+            if(haystack.substring(i,i+len).hashCode()==nh){
+                return i
+            }
+        }
+        return -1
+    }
 }
