@@ -69,4 +69,50 @@ class Solution {
         }
         return -1
     }
+	
+	
+    val MOD=1000000007
+    var powArr=IntArray(50001)
+    fun strStr(haystack: String, needle: String): Int {
+        if(needle.length==0){
+            return 0
+        }
+        if(haystack.length==0){
+            return -1
+        }
+        
+        powArr[0]=1
+        for(i in 1..50000) {
+            powArr[i]=(powArr[i-1]*7)%MOD
+        }
+        
+        var nh=convertToInt(needle)
+        var len=needle.length
+        var tmp=convertToInt(haystack.substring(0,minOf(len,haystack.length)))
+        
+        for(i in 0..haystack.length-needle.length){
+            //println("${tmp} ${nh}")
+            if(tmp==nh){
+                return i
+            }
+            tmp-=(haystack[i]-'a')
+            //print("${tmp} ")
+            tmp/=7
+            //print("${tmp} ")
+            if(len+i<haystack.length) {   
+                tmp=(tmp+(haystack[len+i]-'a')*powArr[len-1])%MOD
+            }
+            //println(tmp)
+        }
+        return -1
+    }
+    fun convertToInt(s: String): Int {
+        var ret=0
+        for(i in 0..s.length-1){
+            ret+=powArr[i]*(s[i]-'a')
+            ret%=MOD
+            //println("${s[i]} ${ret}")
+        }
+        return ret
+    }
 }
