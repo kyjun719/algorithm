@@ -34,7 +34,7 @@ class MinStack() {
 /*
  4번풀이, Pair을 사용함
  */
-class MinStack() {
+class MinStack2() {
 
     /** initialize your data structure here. */
     private var list = mutableListOf<Pair<Int, Int>>()

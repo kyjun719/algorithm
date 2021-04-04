@@ -1,5 +1,4 @@
 class Trie() {
-
     /** Initialize your data structure here. */
     val ch=Array<Trie?>(26) { null }
     var isFinish=false

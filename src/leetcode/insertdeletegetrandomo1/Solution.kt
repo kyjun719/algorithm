@@ -1,9 +1,10 @@
-class RandomizedSet() {
+import java.util.*
 
+class RandomizedSet() {
     /** Initialize your data structure here. */
     var map=mutableMapOf<Int,Int>()
     var list=mutableListOf<Int>()
-    var random=Random()
+    var random= Random()
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     fun insert(`val`: Int): Boolean {
         if(map[`val`]==null){

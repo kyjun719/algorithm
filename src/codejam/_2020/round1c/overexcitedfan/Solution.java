@@ -2,7 +2,6 @@ package codejam._2020.round1c.overexcitedfan;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 

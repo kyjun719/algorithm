@@ -99,7 +99,8 @@ public class Main {
 					if(upper[there] > upper[here]+cost) {
 						upper[there] = upper[here]+cost;
 						
-						if(i == V-1 && reachable[there][1] && reachable[here][1]) {
+						//if(i == V-1 && reachable[there][1] && reachable[here][1]) {
+						if(reachable[there][1] && reachable[here][1]) {
 							cycle = true;
 						}
 					}

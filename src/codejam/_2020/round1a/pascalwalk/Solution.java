@@ -3,7 +3,6 @@ package codejam._2020.round1a.pascalwalk;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class Solution {
 	static int[][] pascalArr;
