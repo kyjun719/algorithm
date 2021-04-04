@@ -28,8 +28,9 @@ public class Main {
 				int[] tmp = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 				V = tmp[0];
 				int w = tmp[1];
-				
+				//가장 빠른시간
 				forwardAdj = new ArrayList[V];
+				//가장 느린시간
 				backwardAdj = new ArrayList[V];
 				reachable = new boolean[V][V];
 				for(int i = 0; i < V; i++) {
@@ -47,6 +48,7 @@ public class Main {
 					reachable[a][b] = true;
 				}
 				
+				//각 노드별 접근가능한지 확인
 				for(int i = 0; i < V; i++) {
 					for(int j = 0; j < V; j++) {
 						for(int k = 0; k < V; k++) {
@@ -98,9 +100,8 @@ public class Main {
 					int cost = e.weight;
 					if(upper[there] > upper[here]+cost) {
 						upper[there] = upper[here]+cost;
-						
-						//if(i == V-1 && reachable[there][1] && reachable[here][1]) {
-						if(reachable[there][1] && reachable[here][1]) {
+						//마지막 완화가 가능하다면 해당 루프에 음의 사이클이 있음
+						if(i == V-1 && reachable[there][1] && reachable[here][1]) {
 							cycle = true;
 						}
 					}
@@ -111,8 +112,7 @@ public class Main {
 		if(cycle) {
 			upper[1] = -INF;
 		}
-		
-		
+
 		return upper;
 	}
 }
