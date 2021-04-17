@@ -1,5 +1,7 @@
 #### 문제를 읽고 이해하기
-https://programmers.co.kr/learn/courses/30/lessons/62049
+~~https://programmers.co.kr/learn/courses/30/lessons/62049~~
+<br>
+문제없음
 
 input</br>
 1

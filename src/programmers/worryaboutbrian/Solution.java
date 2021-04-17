@@ -1,4 +1,4 @@
-package programmers._1830;
+package programmers.worryaboutbrian;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

@@ -1,4 +1,4 @@
-package programmers._42898;
+package programmers.roadtoschool;
 
 import java.util.*;
 class Solution {

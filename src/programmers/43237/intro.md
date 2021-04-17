@@ -1,5 +1,7 @@
 #### 문제를 읽고 이해하기
-https://programmers.co.kr/learn/courses/30/lessons/43237
+~~https://programmers.co.kr/learn/courses/30/lessons/43237~~
+<br>
+문제 없음
 
 input</br>
 [120, 110, 140, 150], 485

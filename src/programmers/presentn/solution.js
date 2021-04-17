@@ -1,4 +1,8 @@
 function solution(N, number) {
+    if(N == number) {
+        return 1
+    }
+
     var val = [];
     for(var i = 0; i < 8; i++) {
         val.push(new Set([parseInt(String(N).repeat(i+1))]));

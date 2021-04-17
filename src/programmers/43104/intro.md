@@ -1,5 +1,7 @@
 #### 문제를 읽고 이해하기
-https://programmers.co.kr/learn/courses/30/lessons/43104
+~~https://programmers.co.kr/learn/courses/30/lessons/43104~~
+<br>
+문제 없음
 
 input</br>
 5
