@@ -2,10 +2,7 @@ package algospot.PROMISES;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 
 public class Main {
 	private static int INF = 987654321;
@@ -39,14 +36,6 @@ public class Main {
 
 					adj[a][b] = v;
 					adj[b][a] = v;
-				}
-
-				for(int k = 0; k < v; k++) {
-					for(int x = 0; x < v; x++) {
-						for(int y = 0; y < v; y++) {
-							adj[x][y] = Math.min(adj[x][y], adj[x][k]+adj[k][y]);
-						}
-					}
 				}
 
 				int ans = 0;

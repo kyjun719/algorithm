@@ -2,22 +2,22 @@
 https://algospot.com/judge/problem/read/PROMISES
 
 input</br>
-2
-4 2 2
-0 1 4
-0 3 1
-0 2 2
-1 2 6
-4 2 2
-0 1 4
-0 3 1
-1 2 6
-0 2 2
+2<br>
+4 2 2<br>
+0 1 4<br>
+0 3 1<br>
+0 2 2<br>
+1 2 6<br>
+4 2 2<br>
+0 1 4<br>
+0 3 1<br>
+1 2 6<br>
+0 2 2<br>
 
 
 output</br>
-1
-0
+1<br>
+0<br>
  
 #### 재정의와 추상화<br>
 -- 문제를 읽고 본인이 이해하기 쉬운 방식으로 해석<br>
