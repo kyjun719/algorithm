@@ -38,6 +38,8 @@ public class Main {
 					adj[b][a] = v;
 				}
 
+				init();
+
 				int ans = 0;
 				for(int i = 0; i < n; i++) {
 					int[] info = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
@@ -67,5 +69,18 @@ public class Main {
 		}
 
 		return true;
+	}
+
+	private static void init() {
+		for(int k = 0; k < v; k++) {
+			for(int i = 0; i < v; i++) {
+				if(adj[i][k] == INF) {
+					continue;
+				}
+				for(int j = 0; j < v; j++) {
+					adj[i][j] = Math.min(adj[i][j], adj[i][k]+adj[k][j]);
+				}
+			}
+		}
 	}
 }
