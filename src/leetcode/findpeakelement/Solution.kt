@@ -1,7 +1,7 @@
 private class findpeakelement{
     class Solution {
         fun findPeakElement(nums: IntArray): Int {
-            return nums.indexOf(nums.max()!!)
+            return nums.indexOf(nums.maxOrNull()!!)
         }
 
         fun findPeakElement2(nums: IntArray): Int {
