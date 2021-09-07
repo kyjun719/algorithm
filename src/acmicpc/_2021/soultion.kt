@@ -1,7 +1,7 @@
 package acmicpc._2021
 
 /**
- * 100%에서 실패...!;;
+ * TODO 100%에서 실패...!;;
  */
 lateinit var ptrArr: Array<MutableList<Int>>
 var n = 0
