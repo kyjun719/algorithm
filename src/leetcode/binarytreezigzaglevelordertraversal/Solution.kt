@@ -27,7 +27,7 @@ private class binarytreezigzaglevelordertraversal{
                         continue
                     }
                     //print("${tmp?.`val`} >> ")
-                    list.add(tmp?.`val`)
+                    list.add(tmp?.`val`!!)
                     if(lf){
                         tmp?.right?.let{next.add(0,it)}
                         tmp?.left?.let{next.add(0,it)}

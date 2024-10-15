@@ -38,7 +38,7 @@ private class binarytreeinordertraversal{
             var visited=mutableListOf<Int>()
             while(q.size>0){
                 var node=q[q.size-1]
-                visited.add(node?.hashCode())
+                visited.add(node?.hashCode()!!)
                 /*
                 for(n in q){
                     print("${n.hashCode()} ")

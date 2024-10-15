@@ -1,0 +1,104 @@
+<html>
+<head> <title>USACO DEC06 wpb Analysis</title> </head>
+<body bgcolor=#FFFFFF>
+<center><img src='/usaco/cow1.jpg' width='742' height='118'></center>
+<h2>USACO DEC06 Problem 'wpb' Analysis</h2>
+<h4>by Rob Kolstad</h4>
+<p>The solution to wonderprimes requires a routine to test prime-ness
+along with code to process the integer parts of numbers that might
+qualify as wonderprimes.
+
+<p>Efficiency is generally important for prime-testing routines which
+require brute-force testing. The factors to be tested to disqualify a
+prime range from 2 through sqrt(n). Of course, even numbers starting
+with 4 need not be tested. One set of logic to do this looks like this:
+<pre>prime (n) {
+    int i;
+    if (n &gt; 0 &amp;&amp; n &lt;= 3) return 1;
+    if (n %2 == 0) return 0;
+    for (i = 3; i*i &lt;= n; i+=2)
+        if (n % i == 0) return 0;
+    return 1;
+}
+</pre>
+The termination condition of <tt>i*i &lt= n</tt> is one way to test
+only the factors of integer. One could also start at sqrt(n) (as
+calculated by some math routine) and count backwards. I haven't done
+the tests to see if that's faster or not since the sqrt() takes a
+while to compute and most numbers are quickly disqualified with low
+factors.
+
+<p> Disassembling an integer into two pieces requires using the mod
+(%) and integer divide (/) operators and a power of ten.  By way of
+example, consider the integer 1234567. Here is a table of some powers
+of ten and the result of mod and integer divide:<pre> Power      Divide    Mod
+10         123456         7
+100         12345        67
+1000         1234       567
+10000         123      4567
+100000         12     34567
+1000000         1    234567</pre>
+You can see that the operations extract the digits of interest for a
+wonderprime. Thus <tt>candidate/power</tt> is the first digits of a
+candidate wonderprime while <tt>candidate%power</tt> is the final
+digits. It might also be clear that one can count the digits of a
+number by successively dividing by 10 until the number becomes 0.
+
+<p>Another brute force problem, basically the steps are:
+<ul>
+<li>For each possible partitioning of the wonderprime</li>
+<ul>
+<li>Reset bottom digits (carefully -- top digit is '1' after reset) if top is
+to be incremented</li>
+<li>Count bottom digits up to prime</li>
+<li>Reset top digits carefully if they are too short</li>
+<li>Count top digits up to prime (be careful of overflows!)</li>
+<li>See if answer for this partitioning is the best</li>
+</ul>
+</ul>
+
+<p>Richard Peng's code:<pre>
+#include &lt;stdio.h&gt;
+
+int d,n,ans;
+int power[10]={1, 10, 100, 1000, 10000, 100000, 1000000, 10000000,
+        100000000, 1000000000};
+
+ndigits (int a) {
+    int ans;
+    for (ans=0; a!=0; a=a/10, ans++);
+    return ans;
+}
+
+void testwonderprime (long pow) {
+    long n1 = n;                                /* work copy of n */
+    /**** get bottom digits right ****/
+    if( (!prime(n1/pow)) || ndigits(n1/pow)&lt;d)  /* top digits not prime? */
+        n1 -= (n1%pow) + pow/10;                /* start over on bottom */
+    for ( ; !(prime(n1%pow)) || ndigits(n1%pow)&lt;d; n1++)
+        ;                                       /* increment bottom digits until prime &amp; long enough */
+
+    /**** get top digits right ****/
+    if (ndigits (n1/pow)&lt;d)                  /* get enough digits on top */
+        n1 = n1%pow + power[d-1]*pow;
+    for(; !prime(n1/pow); n1+=pow)              /* make top prime */
+        if (n1 &gt; 2000000000 || n1 &lt; 0) return;
+    if (n1 &lt; 0) return;
+    if (n1 &lt; ans)
+        ans=n1;
+}
+
+main() {
+    long i;
+    FILE *fin=fopen("wpb.in","r");
+    FILE *fout=fopen("wpb.out","w");
+    fscanf(fin,"%d %d", &amp;d, &amp;n);
+    ans = 2000000000;                           /* "infinity" */
+    for(i=d; i&lt;9; i++)
+        testwonderprime (power[i]);
+    fprintf (fout,"%d\n",ans);
+    fclose (fin);
+    fclose (fout);
+}
+</pre>
+
