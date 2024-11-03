@@ -26,7 +26,8 @@ fun main() {
         stack = ArrayDeque()
         i = 0
 
-        var ret = solve()
+//        var ret = solve()
+        var ret = solve2()
         if (stack.isNotEmpty()) ret = 0
 
         bw.write(ret.toString())
@@ -65,6 +66,46 @@ private fun solve(): Int {
                 } else {
                     return 0
                 }
+            }
+        }
+    }
+
+    return ret
+}
+
+private fun solve2(): Int {
+    var ret = 0
+    var tmp = 1
+
+    for (i in str.indices) {
+        when (str[i]) {
+            '(' -> {
+                stack.addLast('(')
+                tmp *= 2
+            }
+            '[' -> {
+                stack.addLast('[')
+                tmp *= 3
+            }
+            ')' -> {
+                if (stack.isEmpty() || stack.last() != '(') {
+                    return 0
+                }
+                if (str[i-1] == '(') {
+                    ret += tmp
+                }
+                stack.removeLast()
+                tmp /= 2
+            }
+            ']' -> {
+                if (stack.isEmpty() || stack.last() != '[') {
+                    return 0
+                }
+                if (str[i-1] == '[') {
+                    ret += tmp
+                }
+                stack.removeLast()
+                tmp /= 3
             }
         }
     }
