@@ -18,6 +18,8 @@ n*n판에 n개의 퀸을 놓을 수 있는 경우의 수
     - from https://eine.tistory.com/entry/%EB%B0%B1%EC%A4%80-9663%EB%B2%88-%EB%AC%B8%EC%A0%9C-N-Queen-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4
 3. 1과 비슷하지만, 각 행에대한 퀸의 위치값을 저장하여, 대각선의 경우 행의 차이와 열의 차이값이 같으므로 이때 퀸을 놓지 못하는것으로 판정
     - from https://mygumi.tistory.com/199
+4. y, x+y(좌측하단에서 우측상단), x-y+n-1(좌측상단에서 우측하단) 값을 저장하여 대각선, x축으로 놓을수 있는지 여부를 저장
+    - from https://blog.encrypted.gg/945
 
 #### 계획 검증하기
 가장짧은 2의 경우도 타임아웃 발생
